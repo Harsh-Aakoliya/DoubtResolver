@@ -1,0 +1,97 @@
+.auth-section{
+    min-height: 100vh; /*whole size of entier browser*/
+    margin: 0% auto;
+    background-color: #f1f2f3;
+    display: flex; /*AboutAuth and signup div will be side by side and this is bydefault if we want like one at the above other we need to give flex-direction: column*/
+    justify-content: center; /*left and right have same space*/
+    align-items: center; /* top and above have same space*/
+}
+
+/*for AboutAuth*/
+.auth-container-1{
+    /* below two line will give space between AboutAuth and signup container*/
+    padding: 20px ;
+    margin-right:  30px;
+}
+
+.login-logo{
+    padding: 20px 30px;
+}
+
+
+/*for login as well as sign up*/
+.auth-container-2{
+    min-width: 20%;
+    display: flex;
+    flex-direction: column; /* if we not give this then stackoverflow logo will be at left and login page at right because flex-direction is side by side bydefault*/
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-container-2 form{
+    width: 100%;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column; /*email and password will be one above other*/
+    box-shadow: 0 10px 25px rgb(0 0 0 /5%),
+                0 20px 48px rgb(0 0 0 /5%),
+                0 1px 4px rgb(0 0 0/10% );
+}
+
+.auth-container-2 form label input{
+    padding: 10px;/* Give space between text and border so box become bigger then usual*/
+    width: calc(100% - 30px); /* there should be space at front and after of minus in calc so here it will leave intotal 30px at side of input box*/
+    border: solid 1px #0000003e;
+    font-size: 13px; /* font size of text inside input*/
+}
+
+
+/*To reduce space between label and input box. since there are only three input box so*/
+/*below will select Display name(1) , email(2), password(3) so that last label (checkbox) will not be selected*/
+.auth-container-2 form label:nth-child(1) h4,
+.auth-container-2 form label:nth-child(2) h4,
+.auth-container-2 form label:nth-child(3) h4{
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+
+/*for checkbox*/
+.auth-container-2 form label:nth-child(4){
+    display: flex;
+}
+
+/*for box*/
+.auth-container-2 form label:nth-child(4) input {
+    width: 15%;
+    margin: 13px 0px;
+    padding-left: 50px;
+}
+
+
+.auth-btn{
+    margin-top: 10px;
+    padding: 10px 5px;
+    background-color: #009dff;
+    border: solid 1px #009dff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.auth-btn:hover{
+    background-color: #018ce3;
+}
+
+.handle-switch-btn{
+    background-color: transparent;
+    color: #007ac6;
+    border:none;
+    font-size: 13px;
+    cursor: pointer;
+}

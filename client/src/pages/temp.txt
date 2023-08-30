@@ -1,0 +1,2 @@
+Questions page
+    Questions page will be same as Home page but differece is in middle content of page Like home page will have Top Questions but as Questions page will have All the Questions
