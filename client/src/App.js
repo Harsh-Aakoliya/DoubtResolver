@@ -6,7 +6,25 @@ import Navbar from './components/Navbar/Navbar'
 import AllRoutes from './AllRoutes';
 
 
+//for displying all the question to home 
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchAllQuestions } from './actions/question';
+
+//for displaying all the users when our application starts
+import { fetchAllUsers } from './actions/users';
+
 function App(){
+
+    const dispatch =useDispatch();
+    useEffect(() => {
+        dispatch(fetchAllQuestions()) //get request to database
+        dispatch(fetchAllUsers());
+    }, [dispatch]); //so in dependency array we have [dispatch] so when ever disptch will be used then it will call this fetchAllQuestions() 
+
+
+
+
     return (
     <div className='App'>
         <Router>

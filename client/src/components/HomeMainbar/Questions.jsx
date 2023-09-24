@@ -1,11 +1,19 @@
 /*This is for individual question */
 import { Link } from 'react-router-dom'
 import React from 'react'
+
+
+//for time 
+import moment from "moment";
+
+
+
 const Questions = ({question}) => {
   return (
     <div className='display-question-container'>
         <div className='display-votes-ans'>
-            <p >{question.upVotes-question.downVotes}</p>
+          {/* here we have used .legth because in schema of upvotes it is array  */}
+            <p >{question.upVote.length-question.downVote.length}</p> 
             <p >votes</p>
         </div>
         <div className='display-votes-ans'>
@@ -14,7 +22,7 @@ const Questions = ({question}) => {
         </div>
         <div className="display-question-details">
              {/* for every answered question we have seprate route */}
-             <Link to={`/Question/${question._id}`} className='question-title-link'>{question.questionTitle}</Link>
+             <Link to={`/Questions/${question._id}`} className='question-title-link'>{question.questionTitle}</Link>
              <div className="display-tags-time">
                 <div className="display-tags">
                   {
@@ -24,7 +32,7 @@ const Questions = ({question}) => {
                   }
                 </div>
                 <p className="display-time">
-                  asked {question.askedOn} {question.userPosted}
+                  asked {moment(question.askedOn).fromNow()} {question.userPosted}
                 </p>
              </div>
         </div>

@@ -3,6 +3,16 @@
 import express from "express";
 import {login,signup} from '../controllers/auth.js'
 
+//for Users page
+import {getAllUsers} from "../controllers/users.js";
+
+
+//importing middleware
+import auth from "../middlewares/auth.js"
+//controller for updating profile
+import {updateProfile} from "../controllers/users.js"
+
+
 const router=express.Router();
 
 
@@ -14,5 +24,16 @@ router.post('/signup',signup);
 
 //if request is like "/user/login" then below callback function will be called because at comment 9) in index.js file we have used app.use("/user",userRoutes);
 router.post('/login',login);
+
+
+
+//for Users page
+router.get("/getAllUsers",getAllUsers);
+
+
+//for changing profile of user
+router.patch("/update/:id",auth,updateProfile);
+
+
 
 export default router;

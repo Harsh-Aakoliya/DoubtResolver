@@ -3,6 +3,8 @@ import mongoose from "mongoose"; //1)importing mongoose to do CRUD operation
 import cors from "cors";
 //10)  for authentication we need to import user.js file
 import userRoutes from "./routes/user.js"
+import questionRoutes from "./routes/Questions.js"
+import answerRoutes from "./routes/Answers.js"
 
 
 //2) To create express server we just need to write → const app=express(); so now out app will be express server
@@ -20,6 +22,10 @@ app.get("/",(req,res)=>{
 
 //9) now one thing is that same as above there can be many request and to write here in one file will be messing so we need to create one folder named as routes which can handle it and after importing that file in to here we can use it as below
 app.use("/user",userRoutes);
+app.use("/questions",questionRoutes); //url will be "localhost:3000/questions/get" for getting data from data base
+app.use("/answer",answerRoutes);
+
+
 
 //4) finding avilable port in environment if not any avilable then need to assign as 5000 which is of server's port
 const PORT=process.env.PORT || 5000;
