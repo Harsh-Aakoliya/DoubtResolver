@@ -8,6 +8,9 @@ import { signup,login } from '../../actions/auth'
 //this for dispatching above function
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import loading from '../../components/Loading/loading'
+
+
 
 
 const Auth = () => {
@@ -21,6 +24,7 @@ const Auth = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     
     const dispatch =useDispatch();
@@ -30,9 +34,10 @@ const Auth = () => {
 
     const handleSubmit=async(e)=>{
         e.preventDefault();//when we submit form it site will not refresh
-        if(email && !password) {alert("Please Enter password"); return;}
-        if(!email && password) {alert("Please Enter Email"); return ;}
-        if(!email && !password) {alert("Please Enter Email and Password"); return;}
+        setIsLoading(true); // Set loading state to true on form submission
+        if(email && !password) {alert("Please Enter password"); setIsLoading(false);return;}
+        if(!email && password) {alert("Please Enter Email"); setIsLoading(false); return ;}
+        if(!email && !password) {alert("Please Enter Email and Password"); setIsLoading(false); return;}
         setError('');
     //     if(isSignup){
     //         if(!name){
@@ -49,18 +54,25 @@ const Auth = () => {
     // }
     if (isSignup && !name) {
         setError('Please enter your name to continue.');
+        setIsLoading(false);
         return;
       }
   
       try {
+        // document.getElementsByClassName("auth-btn").disabled=true;
         if (isSignup) {
-          await dispatch(signup({ name, email, password }, navigate));
+            await dispatch(signup({ name, email, password }, navigate));
         } else {
-          await dispatch(login({ email, password }, navigate));
+            await dispatch(login({ email, password }, navigate));
         }
-      } catch (error) {
+    } catch (error) {
         console.error(error);
+        
         setError('Authentication failed. Please check your credentials and try again.');
+        
+        // document.getElementsByClassName("auth-btn").disabled=false;
+      } finally{
+        setIsLoading(false);
       }
     };
     
@@ -69,8 +81,13 @@ const Auth = () => {
     }
 
   return (
-    <section className='auth-section'>
-
+    <section className={`auth-section ${isLoading ? 'loading-overlay' : ''}`}>
+    {
+    isLoading && 
+    <div className="loading-overlay">
+            <h1>Validating Credential</h1>
+    </div>
+    }
     {
         isSignup && <AboutAuth />
     }
@@ -112,7 +129,7 @@ const Auth = () => {
                     </label>
                 )}
 
-                <button type='submit' className='auth-btn'>{isSignup ? "Sign Up ": "Log In"} </button>
+                <button type='submit' className={`auth-btn ${isLoading ? 'loading' : ''}`} disabled={isLoading} >{isSignup ? "Sign Up ": "Log In"} </button>
                 {
                     isSignup && (
                         <p style={{color:"#666767" ,fontSize:"13px"}}>
