@@ -18,15 +18,13 @@ export const AskQuestion = async (req,res) =>{
 
 }
 
-
-
 //thsi will return all the existing question to frontend
 
 export const getAllQuestions=async (req,res)=>{
 
     try {
         const questionList=await Questions.find();//it will store all the questions from Question schema from database to questionList variable
-        console.log(questionList);
+        // console.log(questionList);
         res.status(200).json(questionList); //sending data to frontend
     } catch (error) {
         res.status(404).json({message : error.message});

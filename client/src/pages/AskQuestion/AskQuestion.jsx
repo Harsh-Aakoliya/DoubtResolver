@@ -20,7 +20,6 @@ const AskQuestion = () => {
     dispatch(askQuestion({questionTitle,questionBody,questionTags,userPosted: User.result.name, userId:User?.result?._id},navigate)) //at the time of dispatching we need an action here it is in question.js of action folder here for parameter as userId : User?.result?._id we can also use userId : User.result._id 
 
   }
-
   const handleEnter=(e)=>{
     if(e.key === "Enter"){
         setQuestionBody(questionBody+"\n");

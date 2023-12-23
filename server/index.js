@@ -7,9 +7,13 @@ import questionRoutes from "./routes/Questions.js"
 import answerRoutes from "./routes/Answers.js"
 
 
+
+// this is for deployment
+import dotenv from "dotenv"
+
 //2) To create express server we just need to write → const app=express(); so now out app will be express server
 const app=express();
-
+dotenv.config();
 
 //3) app.use(express.json( { limit : “30mb” ,extended: true } ) → since our backend is rest-api so all the request will be in form of json only with given limit but we can extend it also because we set extended: true
 app.use(express.json({limit :"30mb" ,extended: true }));
@@ -34,10 +38,13 @@ const PORT=process.env.PORT || 5000;
 //6) create neccesory folders like models, controllers, middlewares and routes
 
 
-const CONNECTION_URL="mongodb+srv://admin:admin@stack-overflow-colne.n4gekxe.mongodb.net/?retryWrites=true&w=majority"
+// const CONNECTION_URL="mongodb+srv://admin:admin@stack-overflow-colne.n4gekxe.mongodb.net/?retryWrites=true&w=majority"
+
+const DATABASE_URL=process.env.CONNECTION_URL
+
 
 //7) 
-mongoose.connect(CONNECTION_URL,{useNewUrlParser:true ,useUnifiedTopology:true})
+mongoose.connect(DATABASE_URL,{useNewUrlParser:true ,useUnifiedTopology:true})
     .then(()=>app.listen(PORT,()=>{
         console.log(`server is running on ${PORT}`);
     }))

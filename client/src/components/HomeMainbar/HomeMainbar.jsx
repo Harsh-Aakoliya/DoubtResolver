@@ -10,7 +10,7 @@ const HomeMainbar = () => {
 
 
   /* for checking user is loged in or not. if not then if user click on askquestion button then he/she must navigate to /Auth page else he/she will navigate to 'AskQuestion' page */
-    const user=1;
+    const user=useSelector((state)=>(state.currentUserReducer));
     const navigate=useNavigate();
     const checkAuth=()=>{
       if(user===null){
@@ -22,8 +22,6 @@ const HomeMainbar = () => {
       }
       
     }
-
-
     //now insted of writing below hard code questionsList array we will retrive existing questionlist from redux store using useSelctor hook
     const questionsList=useSelector(state=>state.questionsReducer);
     // console.log(questionsList);

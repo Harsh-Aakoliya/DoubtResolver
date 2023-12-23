@@ -2,7 +2,7 @@ import React,{useEffect} from 'react'
 
 import './Navbar.css'
 
-import { Link, Navigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import {useSelector,useDispatch} from 'react-redux'
 import logo from '../../assets/logo-stackoverflow.png'
 import search from '../../assets/magnifying-glass-solid.png'
@@ -31,7 +31,6 @@ const Navbar = () => {
         navigate("/");
         dispatch(setCurrentUser(null));//after log out we need to set current user as null
     }
-    
     useEffect(()=>{
         //now as we have setted token time as 1hr so after 1hr our profile should be deleted from localstorage for security perpose like suppose we are using our application at public spot and after that use if we forgot to logout then automatically after token time (in our case it is 1hr) profile should automatically deleted from localstorage 
         const token=User?.token;

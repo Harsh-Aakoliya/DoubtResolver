@@ -10,7 +10,6 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 
-
 const Auth = () => {
     //false means in Auth page we are at Login location
     //true means in Auth page we are at Signup location
@@ -21,34 +20,50 @@ const Auth = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState('');
+
     
     const dispatch =useDispatch();
     const navigate =useNavigate();
 
 
 
-    const handleSubmit=(e)=>{
+    const handleSubmit=async(e)=>{
         e.preventDefault();//when we submit form it site will not refresh
-        if(!email && !password){
-            alert("Enter email and password")
-        }
-
-        if(isSignup){
-            if(!name){
-                alert("Enter name to continue")
-            }
-            //sending data to auth.js file of action folder
-            dispatch(signup({name,email,password},navigate));
-        }
-        else{
-            dispatch(login({email,password},navigate));
-        }
+        if(email && !password) {alert("Please Enter password"); return;}
+        if(!email && password) {alert("Please Enter Email"); return ;}
+        if(!email && !password) {alert("Please Enter Email and Password"); return;}
+        setError('');
+    //     if(isSignup){
+    //         if(!name){
+    //             alert("Enter name to continue")
+    //         }
+    //         //sending data to auth.js file of action folder
+    //         dispatch(signup({name,email,password},navigate));
+    //     }
+    //     else{
+    //         dispatch(login({email,password},navigate));
+    //     }
         
-        console.log({name,email,password});
-    }
-
-
-
+    //     console.log({name,email,password});
+    // }
+    if (isSignup && !name) {
+        setError('Please enter your name to continue.');
+        return;
+      }
+  
+      try {
+        if (isSignup) {
+          await dispatch(signup({ name, email, password }, navigate));
+        } else {
+          await dispatch(login({ email, password }, navigate));
+        }
+      } catch (error) {
+        console.error(error);
+        setError('Authentication failed. Please check your credentials and try again.');
+      }
+    };
+    
     const handleSwitch=()=>{
         setIssignup(!isSignup);
     }
@@ -61,7 +76,7 @@ const Auth = () => {
     }
 
         <div className='auth-container-2'>
-            {!isSignup && <img src={icon} alt='stack Overflow logo' className='login-logo'></img>}
+           {!isSignup && <img src={icon} alt='stack Overflow logo' className='login-logo'></img>} 
             <form onSubmit={handleSubmit}>
                 {
                     isSignup && (
@@ -111,7 +126,7 @@ const Auth = () => {
             </form>
             <p>
                 {isSignup ? "already have an account":"Don't have an account"}
-                   <button type='button' className='handle-switch-btn' onClick={handleSwitch}>      {isSignup?"Login":"signup"}
+                   <button type='button' className='handle-switch-btn' onClick={handleSwitch}>{isSignup?"Login":"signup"}
                 </button>
             </p>
         </div>
@@ -119,4 +134,4 @@ const Auth = () => {
   )
 }
 
-export default Auth
+export default Auth;

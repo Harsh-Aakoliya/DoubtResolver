@@ -21,7 +21,7 @@ export const signup =async(req,res)=>{
         //hashing the password
         const hashedPassword= await bcrypt.hash(password,12);//12 is salt value 
         const newUser=await users.create({name,email,password:hashedPassword});//inserting newuser into users database of atlas and geting it into newUser variable
-        const token=jwt.sign({email:newUser.email , id:newUser._id},"test",{expiresIn:"1h"})//generating token for authentication . here "test" is highly confidential things
+        const token=jwt.sign({email:newUser.email , id:newUser._id},process.env.JWT_SECRET,{expiresIn:"1h"})//generating token for authentication . here "test" is highly confidential things
         res.status(200).json({result:newUser,token});
         
     }
@@ -39,16 +39,19 @@ export const login =async(req,res)=>{
         const existinguser=await users.findOne({email});
         
         if(!existinguser){
+            console.log("user not found");
+            // alert("User Not found");
             return res.status(404).json({message:"User dosen't exist..."});//if user not exist then return message
         }
         
         const isPasswordCrt=await bcrypt.compare(password,existinguser.password);
         
         if(!isPasswordCrt){
+            console.log("Password is incorrect");
             return res.status(400).json({message:"Invalid credentials Password not match"});
         }
 
-        const token=jwt.sign({email:existinguser.email , id:existinguser._id},"test",{expiresIn:"1h"})//generating token for authentication . here "test" is highly confidential things
+        const token=jwt.sign({email:existinguser.email , id:existinguser._id},process.env.JWT_SECRET,{expiresIn:"1h"})//generating token for authentication . here "test" is highly confidential things
         res.status(200).json({result:existinguser,token}); 
     }   
     catch(error){

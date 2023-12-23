@@ -69,7 +69,3 @@ export const deleteAnswer= async (req,res)=>{
         res.status(404).json(error);
     }
 }
-
-
-
-
