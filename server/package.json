@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "build": "npm i"
   },
   "author": "Harsh Aakoliya",
   "license": "ISC",
