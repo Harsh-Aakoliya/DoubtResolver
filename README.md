@@ -1,3 +1,6 @@
+**Deployment Link : https://doubt-resolver.netlify.app/
+**
+
 #`yarn install`
 use above command on the client side to install dependencies
 
