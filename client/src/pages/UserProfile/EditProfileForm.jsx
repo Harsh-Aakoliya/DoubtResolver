@@ -32,6 +32,10 @@ const EditProfileForm = ({currentUser,setSwitch}) => {
                 <h3>Display Name</h3>
                 <input type="text" value={name} onChange={(e) => setName(e.target.value)}/>
             </label>
+            <label htmlFor="picture">
+                <h3>Display Photo</h3>
+                <input type="text" value={name} onChange={(e) => setName(e.target.value)}/>
+            </label>
             <label htmlFor="about">
                 <h3>About Me</h3>
                 <textarea id="about" cols="30" rows="10" value={about} onChange={(e) => setAbout(e.target.value)} ></textarea>

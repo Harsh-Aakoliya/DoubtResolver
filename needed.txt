@@ -1,0 +1,56 @@
+//   const questionsList=[
+//   {
+//     _id:1,
+//     upVotes:3,
+//     downVotes:2,
+//     noOfAnswer:4,
+//     questionTitle:"what is function",
+//     questionBody: "It means to be",
+//     questionTags:["java","c++","c"],
+//     userPosted:"mano",
+//     userId:1,
+//     askedOn:"jan 1",
+//     answer:[{
+//       answerBody: "Answer",
+//       userAnswered:"Harsh1",
+//       answeredOn:"jan 2",
+//       userId:11
+//     }]
+//   },
+//   {
+//     _id:2,
+//     upVotes:3,
+//     downVotes:90,
+//     noOfAnswer:4,
+//     questionTitle:"what is function",
+//     questionBody: "It means to be",
+//     questionTags:["java","c++","c"],
+//     userPosted:"mano",
+//     userId:1,
+//     askedOn:"jan 1",
+//     answer:[{
+//       answerBody: "Answer",
+//       userAnswered:"Harsh1",
+//       answeredOn:"jan 2",
+//       userId:11
+//     }]
+//   },
+//   {
+//     _id:3,
+//     upVotes:3,
+//     downVotes:2,
+//     noOfAnswer:4,
+//     questionTitle:"what is function",
+//     questionBody: "It means to be",
+//     questionTags:["java","c++","c"],
+//     userPosted:"mano",
+//     userId:1,
+//     askedOn:"jan 1",
+//     answer:[{
+//       answerBody: "Answer",
+//       userAnswered:"Harsh1",
+//       answeredOn:"jan 2",
+//       userId:11
+//     }]
+//   }
+// ];
