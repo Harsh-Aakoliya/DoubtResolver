@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 
 import {useDispatch} from "react-redux"
 import { updateProfile } from '../../actions/users';
+import dummy from '../../assets/logo-stackoverflow.png'
+
 const EditProfileForm = ({currentUser,setSwitch}) => {
 
 
@@ -10,14 +12,23 @@ const EditProfileForm = ({currentUser,setSwitch}) => {
     const [about,setAbout] =useState(currentUser?.result?.about);
     const [tags,setTags] =useState("");
 
+    const [postImage, setPostImage] = useState("")
+    const handleFileUpload = async (e) => {
+        const file = e.target.files[0];
+        const base64 = await convertToBase64(file);
+        console.log(base64)
+        setPostImage({ ...postImage, myFile : base64 })
+      }
+
     const dispatch=useDispatch();
     const handleSubmit =(e)=>{
         e.preventDefault();
+
         if(tags.length === 0){
-            dispatch(updateProfile(currentUser?.result?._id,{name,about,tags:currentUser?.result?.tags})); //if tags are not given by user then we will send tags that is already avilable to that profile
+            dispatch(updateProfile(currentUser?.result?._id,{name,about,tags:currentUser?.result?.tags,postImage})); //if tags are not given by user then we will send tags that is already avilable to that profile
         }
         else{
-            dispatch(updateProfile(currentUser?.result?._id,{name,about,tags}));
+            dispatch(updateProfile(currentUser?.result?._id,{name,about,tags,postImage}));
         }
         setSwitch(false);//we are going to that state where we are displying bio
     }
@@ -34,7 +45,8 @@ const EditProfileForm = ({currentUser,setSwitch}) => {
             </label>
             <label htmlFor="picture">
                 <h3>Display Photo</h3>
-                <input type="text" value={name} onChange={(e) => setName(e.target.value)}/>
+                <img src={postImage.myFile || dummy} alt="" />
+                <input type="file" lable="Image" name="myFile" id='file-upload' accept='.jpeg, .png, .jpg' onChange={(e) => handleFileUpload(e)}/>
             </label>
             <label htmlFor="about">
                 <h3>About Me</h3>
@@ -53,3 +65,16 @@ const EditProfileForm = ({currentUser,setSwitch}) => {
 }
 
 export default EditProfileForm
+
+function convertToBase64(file){
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result)
+      };
+      fileReader.onerror = (error) => {
+        reject(error)
+      }
+    })
+  }

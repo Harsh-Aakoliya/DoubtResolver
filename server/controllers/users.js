@@ -18,14 +18,14 @@ export const getAllUsers=async(req,res)=>{
 //for updating profile
 export const updateProfile = async(req,res) =>{
     const {id:_id}=req.params;
-    const {name,about,tags} =req.body;
+    const {name,about,tags,profilePhoto} =req.body;
     //given id is valid or not
     if(!mongoose.Types.ObjectId.isValid(_id)){
         return res.status(404).send("profile with this id is not avilable");
     }
 
     try {
-        const updatedProfile=await User.findByIdAndUpdate(_id, {$set: {"name":name, "about":about,"tags":tags}},{new:true}); //now new:true means if we don't give new:true it will update profile to database but it will return old profile with out updated but here new:true so it will return profile after updating
+        const updatedProfile=await User.findByIdAndUpdate(_id, {$set: {"name":name, "about":about,"tags":tags,"profilePhoto":profilePhoto}},{new:true}); //now new:true means if we don't give new:true it will update profile to database but it will return old profile with out updated but here new:true so it will return profile after updating
 
         res.status(200).json(updatedProfile);
 
