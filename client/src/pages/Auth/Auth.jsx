@@ -32,7 +32,7 @@ const Auth = () => {
 
 
 
-    const handleSubmit=async(e)=>{
+    const handleSubmit= async (e)=>{
         e.preventDefault();//when we submit form it site will not refresh
         setIsLoading(true); // Set loading state to true on form submission
         if(email && !password) {alert("Please Enter password"); setIsLoading(false);return;}

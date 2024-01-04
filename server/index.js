@@ -15,9 +15,10 @@ import dotenv from "dotenv"
 const app=express();
 dotenv.config();
 
+
 //3) app.use(express.json( { limit : “30mb” ,extended: true } ) → since our backend is rest-api so all the request will be in form of json only with given limit but we can extend it also because we set extended: true
-app.use(express.json({limit :"30mb" ,extended: true }));
-app.use(express.urlencoded({limit :"30mb" ,extended: true }));
+app.use(express.json({limit :"50mb" ,extended: true }));
+app.use(express.urlencoded({limit :"50mb" ,extended: true }));
 app.use(cors());
 
 app.get("/",(req,res)=>{

@@ -10,7 +10,7 @@ import { useParams } from 'react-router-dom'
 import { FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faBirthdayCake } from "@fortawesome/free-solid-svg-icons"
 //to import pen from fontawesome
-import { fapen } from "@fortawesome/free-solid-svg-icons"
+// import { fapen } from "@fortawesome/free-solid-svg-icons"
 
 
 //for timing
@@ -20,6 +20,9 @@ import moment from "moment"
 import EditProfileForm from './EditProfileForm'
 import ProfileBio from './ProfileBio'
 
+import {Image} from 'cloudinary-react';
+
+
 
 import "./UsersProfile.css"
 
@@ -27,7 +30,7 @@ import "./UsersProfile.css"
 const UserProfile = () => {
 
   const users=useSelector((state) => state.usersReducer)  //we got all the registed user from react redux
-  
+  console.log("all the users",users);
   //now we are extracting id of that user on whose profile currently we at
   const {id}=useParams();
   // console.log(id);
@@ -36,7 +39,7 @@ const UserProfile = () => {
 
   //now we need to diffrentiate current user who have currently logged in and that user whose profile we are currently viewing
   const currentUser= useSelector((state) => state.currentUserReducer);
-  console.log(currentUser);
+  console.log("currentUser",currentUser);
 
   const [Switch, setSwitch] =useState(false);
 
@@ -47,16 +50,25 @@ const UserProfile = () => {
           <div className="home-container-2">
               <section>
                   <div className="user-details-container">
-                      <div className="user-details">
+                   <div className="user-details">
+                      {/* {
+                        currentProfile?.profilePhoto ?
+                        <Image src={currentProfile?.profilePhoto} alt="Image not found" /> :
                         <Avatar backgroundColor="purple" color="white" fontSize="50px" px="40px" py="30px">
-                          {currentProfile?.name.charAt(0).toUpperCase()} 
+                          {currentProfile?.name.charAt(0).toUpperCase()}
                         </Avatar>
-                        <div className="user-name">
-                          <h1>{currentProfile?.name}</h1>
-                          <p><FontAwesomeIcon icon={faBirthdayCake} /> Joined  {moment(currentProfile?.joinedOn).fromNow()}</p>  {/* this will add birthday cake icon form fontawesome icon */} 
-
-                        </div>
+                      }
+                     */}
+                      <div className="user-name">
+                        <h1>{currentProfile?.name}</h1>
+                        <p><FontAwesomeIcon icon={faBirthdayCake} /> Joined {moment(currentProfile?.joinedOn).fromNow()}</p>
                       </div>
+                    </div> 
+                      <Image
+                        src={currentProfile?.profilePhoto}
+                        alt="Image not found"
+                        onError={(e) => console.log("Image Error:", e)}
+                      />
                       {
                         //if current logged in user and profile which we are viewing is same then and only then we need to show that edit btn
                         currentUser?.result._id === id && (

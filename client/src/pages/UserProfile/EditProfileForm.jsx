@@ -3,7 +3,10 @@ import React, { useState } from 'react'
 
 import {useDispatch} from "react-redux"
 import { updateProfile } from '../../actions/users';
-import dummy from '../../assets/logo-stackoverflow.png'
+import dummy from '../../assets/dummy.png'
+
+
+
 
 const EditProfileForm = ({currentUser,setSwitch}) => {
 
@@ -12,27 +15,39 @@ const EditProfileForm = ({currentUser,setSwitch}) => {
     const [about,setAbout] =useState(currentUser?.result?.about);
     const [tags,setTags] =useState("");
 
-    const [postImage, setPostImage] = useState("")
-    const handleFileUpload = async (e) => {
-        const file = e.target.files[0];
-        const base64 = await convertToBase64(file);
-        console.log(base64)
-        setPostImage({ ...postImage, myFile : base64 })
-      }
+    const [fileInputState, setFileInputState] = useState('');
+    const [selectedFile, setSelectedFile] = useState();
+    const [previewSource, setPreviewSource] = useState(dummy);
+
+
+    const handleFileInputChange = (e) => {
+        const file = e.target.files[0];//from multi upload grab the first one
+        previewFile(file);//user can see what they want to upload
+        setSelectedFile(file);
+        setFileInputState(e.target.value);
+    };
+    const previewFile = (file) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);//converting image to url
+        reader.onloadend = () => {
+            setPreviewSource(reader.result);//as soon as file being uploaded we will change the preview state
+        };
+    };
 
     const dispatch=useDispatch();
     const handleSubmit =(e)=>{
         e.preventDefault();
-
+        //we can write below login
+        // if(!selectedFile) 
+        console.log(currentUser);
         if(tags.length === 0){
-            dispatch(updateProfile(currentUser?.result?._id,{name,about,tags:currentUser?.result?.tags,postImage})); //if tags are not given by user then we will send tags that is already avilable to that profile
+            dispatch(updateProfile(currentUser?.result?._id,{name,about,tags:currentUser?.result?.tags,previewSource})); //if tags are not given by user then we will send tags that is already avilable to that profile
         }
         else{
-            dispatch(updateProfile(currentUser?.result?._id,{name,about,tags,postImage}));
+            dispatch(updateProfile(currentUser?.result?._id,{name,about,tags,previewSource}));
         }
         setSwitch(false);//we are going to that state where we are displying bio
     }
-
 
   return (
     <div>
@@ -45,8 +60,19 @@ const EditProfileForm = ({currentUser,setSwitch}) => {
             </label>
             <label htmlFor="picture">
                 <h3>Display Photo</h3>
-                <img src={postImage.myFile || dummy} alt="" />
-                <input type="file" lable="Image" name="myFile" id='file-upload' accept='.jpeg, .png, .jpg' onChange={(e) => handleFileUpload(e)}/>
+                {
+                    previewSource &&(
+                        <img src={previewSource} alt="choosen" style={{height:"300px" , width: "300px"}} />
+                    )
+                }
+                <input
+                    id="fileInput"
+                    type="file"
+                    name="image"
+                    onChange={handleFileInputChange}
+                    value={fileInputState}
+                    className="form-input"
+                />
             </label>
             <label htmlFor="about">
                 <h3>About Me</h3>
@@ -60,21 +86,9 @@ const EditProfileForm = ({currentUser,setSwitch}) => {
             <input type="submit" value="Save Profile" />
             <button type='button' className='user-cancel-btn' onClick={()=>setSwitch(false)}>Cancel</button>
         </form>
+        
     </div>
   )
 }
 
 export default EditProfileForm
-
-function convertToBase64(file){
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-      fileReader.onload = () => {
-        resolve(fileReader.result)
-      };
-      fileReader.onerror = (error) => {
-        reject(error)
-      }
-    })
-  }

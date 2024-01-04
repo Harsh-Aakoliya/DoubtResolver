@@ -9,7 +9,7 @@ const userSchema=mongoose.Schema({
     about:{type:String},
     tags:{type:[String]},//array of string
     joinedOn:{type:Date , default:Date.now}, //when user is created then at that time joinedOn will store
-    profilePhoto : String
+    profilePhoto : {type: String}
 });
 //12) now after creating schema for user now we can use it into auth.js of controllers folder so now go there
 
