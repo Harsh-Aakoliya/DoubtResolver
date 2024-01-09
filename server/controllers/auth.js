@@ -56,6 +56,7 @@ export const login =async(req,res)=>{
     }   
     catch(error){
         req.status(500).json("Something went wrong");
+        // req.status(500).json("Something went wrong");
         // console.log("notdone yet");
     }
     //16) now we have done with backend of authentication so for redux we need to go to client folder and create folders like actions and reducers and goto index.js file of client
