@@ -13,7 +13,7 @@ import thunk from 'redux-thunk'
 import  Reducers  from './reducers';
 
 const store=createStore(Reducers,compose(applyMiddleware(thunk)));
-
+console.log("inside index.js of src folder",store)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -23,3 +23,4 @@ root.render(
     </React.StrictMode>
    </Provider>
 );
+export default store;

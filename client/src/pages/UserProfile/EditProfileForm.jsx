@@ -5,7 +5,7 @@ import {useDispatch} from "react-redux"
 import { updateProfile } from '../../actions/users';
 import dummy from '../../assets/dummy.png'
 
-
+import store from '../..';
 
 
 const EditProfileForm = ({currentUser,setSwitch}) => {
@@ -33,6 +33,8 @@ const EditProfileForm = ({currentUser,setSwitch}) => {
             setPreviewSource(reader.result);//as soon as file being uploaded we will change the preview state
         };
     };
+
+    store.subscribe(()=>console.log("state has been updated and updated state is ",store.getState()))
 
     const dispatch=useDispatch();
     const handleSubmit =(e)=>{
@@ -62,7 +64,7 @@ const EditProfileForm = ({currentUser,setSwitch}) => {
                 <h3>Display Photo</h3>
                 {
                     previewSource &&(
-                        <img src={previewSource} alt="choosen" style={{height:"300px" , width: "300px"}} />
+                        <img src={previewSource} alt="choosen" style={{height:"128px" , width: "128px"}} />
                     )
                 }
                 <input
