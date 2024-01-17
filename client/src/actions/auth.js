@@ -77,3 +77,7 @@ export const signup = (authData, navigate) => async (dispatch) => {
       }
     }
   };
+
+// export const Updatepassword=(email,navigate)=> async(dispatch)=>{
+   
+// }

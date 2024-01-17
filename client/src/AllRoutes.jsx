@@ -8,6 +8,8 @@ import DisplayQuestion from './pages/Questions/DisplayQuestion'
 import Tags from "./pages/Tags/Tags"
 import Users from "./pages/Users/Users"
 import UserProfile from './pages/UserProfile/UserProfile'
+import Forgotpassword from './pages/ForgotPassword/Forgotpassword'
+import ResetPassword from './pages/ForgotPassword/ResetPassword'
 const AllRoutes = () => {
   return (
     <div>
@@ -26,6 +28,11 @@ const AllRoutes = () => {
 
             {/* for specific user page */}
             <Route path="/Users/:id" element={<UserProfile />}></Route>
+
+            <Route path="/Forgotpassword" element={<Forgotpassword />}></Route>
+
+            <Route path="/reset_password/:id/:token" element={<ResetPassword />}></Route>
+
         </Routes>
 
     </div>

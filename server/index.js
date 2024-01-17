@@ -8,6 +8,14 @@ import answerRoutes from "./routes/Answers.js"
 
 
 
+//for email
+import users from "./models/auth.js"
+import jwt from "jsonwebtoken"
+import bcrypt from "bcryptjs"
+import nodemailer from "nodemailer"
+
+
+
 // this is for deployment
 import dotenv from "dotenv"
 
@@ -31,6 +39,65 @@ app.use("/questions",questionRoutes); //url will be "localhost:3000/questions/ge
 app.use("/answer",answerRoutes);
 
 
+app.post("/Forgotpassword",async (req,res)=>{
+    const {email}=req.body;
+    console.log(email);
+    await users.findOne({email:email})
+    .then(user=>{
+        if(!user){
+            return res.send({Status: "User not existed from backend"});
+        }
+        // alert("mail send");
+        console.log("a;slkfjas;dlkfja;sdkfja;sldjfa;sdfja;sdkjf");
+        const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, {expiresIn: "1d"})
+        var transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+              user: 'harshaakoliya20@gmail.com',
+              pass: "fsfu xhpj zqpq jawn"
+            }
+          });
+          
+
+          var mailOptions = {
+            from: 'harshaakoliya20@gmail.com',
+            to: user.email,
+            subject: 'Reset Password Link', 
+            text: `http://localhost:3000/reset_password/${user._id}/${token}`
+          };
+          
+          transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+            } else {
+              return res.send({Status: "Success"})
+            }
+          });
+    })
+})
+
+app.post("/reset_password/:id/:token",async(req,res)=>{
+    const {id,token}=req.params;
+    const {password}=req.body;
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        if(err) {
+            return res.json({Status: "Error with token"})
+        } else {
+          console.log("new password with out hash is ",password);
+          bcrypt.hash(password, 12)
+            .then(hash => {
+               users.findByIdAndUpdate({_id: id}, {password: hash})
+                .then(u => {
+                  res.send({Status: "Success"})
+                  console.log("updated successfully ");
+                })
+                .catch(err => res.send({Status: err}))
+            })
+            .catch(err => res.send({Status: err}))
+        }
+    })
+
+})
 
 //4) finding avilable port in environment if not any avilable then need to assign as 5000 which is of server's port
 const PORT=process.env.PORT || 5000;

@@ -80,6 +80,10 @@ const Auth = () => {
         setIssignup(!isSignup);
     }
 
+    const handleforgotpass=()=>{
+        navigate("/Forgotpassword");
+    }
+
   return (
     <section className={`auth-section ${isLoading ? 'loading-overlay' : ''}`}>
     {
@@ -113,7 +117,7 @@ const Auth = () => {
                     <div style={{display:'flex',justifyContent:'space-between'}}>
                         <h4>Password</h4>
                         {/* if we wan't to do login at that time we need forgot password else at the time of account creation i.e. at time of signup we don't need forgot password  */}
-                        {!isSignup &&<p style={{fontSize:"13px"}}>Forgot Password ?</p>}
+                        {!isSignup &&<button type='button' onClick={handleforgotpass}>Forgot Password</button>}
                         
                     </div>
                     <input type='password' name='password' id='password'  onChange={(e)=>{setPassword(e.target.value)}}/>

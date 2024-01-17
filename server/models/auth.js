@@ -14,4 +14,3 @@ const userSchema=mongoose.Schema({
 //12) now after creating schema for user now we can use it into auth.js of controllers folder so now go there
 
 export default mongoose.model("User",userSchema); //we have given this model name as User
-
