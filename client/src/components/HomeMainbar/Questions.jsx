@@ -17,7 +17,7 @@ const Questions = ({question}) => {
             <p >votes</p>
         </div>
         <div className='display-votes-ans'>
-            <p >{question.noOfAnswer}</p>
+            <p >{question.noOfAnswers}</p>
             <p >answers</p>
         </div>
         <div className="display-question-details">
