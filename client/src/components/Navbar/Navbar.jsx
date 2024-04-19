@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React,{useEffect, useState} from 'react'
 
 import './Navbar.css'
 
@@ -13,6 +13,8 @@ import { setCurrentUser } from '../../actions/currentUser'
 //for log out 
 import { useNavigate } from 'react-router-dom'
 import decode from "jwt-decode"//it will be used to check weater token is expried or not
+import LeftSidebar from '../LeftSidebar/LeftSidebar'
+import Widget from '../RightSidebar/Widget'
 
 
 const Navbar = () => {
@@ -43,9 +45,19 @@ const Navbar = () => {
         }
         dispatch(setCurrentUser(JSON.parse(localStorage.getItem("Profile"))))
     },[dispatch]);
-    
+    const [clicked,setclicked]=useState(false);
+    const handleclick=()=>{
+        console.log("toggle button is clicked",clicked);
+        setclicked(!clicked);
+    }
     return (
     <nav className='main-nav'>
+        <div className='hamburger'>
+            <button class="toggle-button" onClick={handleclick}>Click me!</button>
+            <div className={clicked ? 'left-sidebar-div-collapse' : 'left-sidebar-div-expand'}>
+                <LeftSidebar/>
+            </div>
+        </div>
         <div className='navbar'>
             <Link to='/' className='nav-item nav-logo'>
                 <img src={logo} alt="Logo" />

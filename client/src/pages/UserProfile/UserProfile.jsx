@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import LeftSidebar from "../../components/LeftSidebar/LeftSidebar"
 import Avatar from "../../components/Avatar/Avatar"
 
@@ -43,10 +43,23 @@ const UserProfile = () => {
 
   const [Switch, setSwitch] =useState(false);
 
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <div className='home-container-1'>
-       <LeftSidebar />
+       { windowWidth>=700 && <LeftSidebar/>}
           <div className="home-container-2">
               <section>
                   <div className="user-details-container">

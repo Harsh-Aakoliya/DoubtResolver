@@ -1,0 +1,10 @@
+@media screen and (max-width: 700px) {
+    .left-sidebar {
+        display: none; /* Hide the left sidebar */
+    }
+    .home-container-2 {
+        width: 100%; /* Make home container 2 fill the entire width */
+        float: none; /* Remove any float */
+        /* text-align: center; Center its contents */
+    }
+}

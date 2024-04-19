@@ -85,3 +85,34 @@
 .nav-links:hover{
     background-color: #d3e4eb ;
 }
+
+
+
+.toggle-button {
+    display: none;
+}
+.hamburger{
+    display: none;
+}
+@media only screen and (max-width: 700px) {
+    .hamburger{
+        display: block;
+    }
+    .toggle-button {
+        display: block;
+    }
+    .left-sidebar-div-collapse{
+        display: none;
+    }
+    .left-sidebar-div-expand{
+        border-radius: 10px;
+        /* border: solid black 1px; */
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: whitesmoke;
+        z-index: 1;
+        box-shadow: 0px 2px 5px #00000033;
+    }
+}

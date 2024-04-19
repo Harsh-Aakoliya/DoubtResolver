@@ -51,5 +51,10 @@
 }
 
 
-
-
+@media screen and (max-width: 700px) {
+    .home-container-2 {
+        width: 100%; /* Make home container 2 fill the entire width */
+        float: none; /* Remove any float */
+        /* text-align: center; Center its contents */
+    }
+}

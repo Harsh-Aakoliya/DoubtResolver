@@ -5,7 +5,7 @@ import Globe from '../../assets/globe.png'
 const LeftSidebar = () => {
   return (
     <div className='left-sidebar'>
-        LeftSidebar
+        {/* LeftSidebar */}
         <nav className='side-nav'>
             <NavLink to='/' className='side-nav-links' activeClassName='active'>
                     <p>Home</p>
