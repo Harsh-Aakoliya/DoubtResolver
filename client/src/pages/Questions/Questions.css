@@ -3,9 +3,13 @@
     float: left;
     margin: 25px 0px;
     padding: 0px;
-
 }
-
+@media screen and (max-width: 800px) {
+    .question-details-page {
+        width: 100%; 
+        float: none; 
+    }
+}
 .question-details-container{
     margin-bottom: 20px;
     padding-bottom: 20px;
