@@ -17,6 +17,11 @@ import LeftSidebar from '../LeftSidebar/LeftSidebar'
 import Widget from '../RightSidebar/Widget'
 
 
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Dropdown from 'react-bootstrap/Dropdown';
+
+
 const Navbar = () => {
 
     // var User=null;//now instead of setting manually our login data is available in local storage so we can use it
@@ -33,6 +38,12 @@ const Navbar = () => {
         navigate("/");
         dispatch(setCurrentUser(null));//after log out we need to set current user as null
     }
+    const [clicked,setclicked]=useState(true);
+    const handleclick=()=>{
+        console.log("toggle button is clicked",clicked);
+        setclicked(!clicked);
+    }
+    console.log("clicked",clicked);
     useEffect(()=>{
         //now as we have setted token time as 1hr so after 1hr our profile should be deleted from localstorage for security perpose like suppose we are using our application at public spot and after that use if we forgot to logout then automatically after token time (in our case it is 1hr) profile should automatically deleted from localstorage 
         const token=User?.token;
@@ -45,11 +56,7 @@ const Navbar = () => {
         }
         dispatch(setCurrentUser(JSON.parse(localStorage.getItem("Profile"))))
     },[dispatch]);
-    const [clicked,setclicked]=useState(false);
-    const handleclick=()=>{
-        console.log("toggle button is clicked",clicked);
-        setclicked(!clicked);
-    }
+    
     return (
     <nav className='main-nav'>
         <div className='hamburger'>
@@ -69,14 +76,17 @@ const Navbar = () => {
                 <input type='text' placeholder="search..."/>
                 <img src={search} alt='search' className='search-icon'/>
             </form>
+
             {User === null ? 
                 <Link to='/Auth' className='nav-item nav-links'>Log In</Link>:
                 <>
+                {/* <div > */}
                     <Avatar backgroundColor="#009dff" px='10px' py='7px' borderRadius='50%' color="white">
                         {/* here to="/" for Link tag will be profile page not home page */}
                         <Link to={`Users/${User?.result?._id}`} style={{color:"white" , textDecoration:"none"}}>{User.result.name.charAt(0).toUpperCase()}</Link>
                     </Avatar>
                     <button className='nav-item nav-links' onClick={handleLogout}>Log Out</button>
+                {/* </div> */}
                 </>
             }
         </div>
