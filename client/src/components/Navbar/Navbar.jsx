@@ -14,12 +14,6 @@ import { setCurrentUser } from '../../actions/currentUser'
 import { useNavigate } from 'react-router-dom'
 import decode from "jwt-decode"//it will be used to check weater token is expried or not
 import LeftSidebar from '../LeftSidebar/LeftSidebar'
-import Widget from '../RightSidebar/Widget'
-
-
-import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import Dropdown from 'react-bootstrap/Dropdown';
 
 
 const Navbar = () => {

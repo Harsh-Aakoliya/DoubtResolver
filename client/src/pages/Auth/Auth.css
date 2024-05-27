@@ -46,7 +46,12 @@
     border: solid 1px #0000003e;
     font-size: 13px; /* font size of text inside input*/
 }
-
+.auth-container-2 label input[type=checkbox] {
+    /* margin: 4px 0 0;
+    line-height: normal; */
+    width: 20px;
+    height: 20px;
+}
 
 /*To reduce space between label and input box. since there are only three input box so*/
 /*below will select Display name(1) , email(2), password(3) so that last label (checkbox) will not be selected*/
@@ -65,8 +70,7 @@
 
 /*for box*/
 .auth-container-2 form label:nth-child(4) input {
-    width: 15%;
-    margin: 13px 0px;
+    margin:10px 7px 10px 0px;
     padding-left: 50px;
 }
 
