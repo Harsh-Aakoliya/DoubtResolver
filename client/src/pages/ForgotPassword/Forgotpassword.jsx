@@ -33,8 +33,8 @@ const Forgotpassword = () => {
             }
         })
         if(found){
-            axios.post("http://localhost:5000/Forgotpassword",{email})
-            // axios.post("https://stackoverflow-clone-bf06.onrender.com/Forgotpassword",{email})
+            // axios.post("http://localhost:5000/Forgotpassword",{email})
+            axios.post("https://stackoverflow-clone-bf06.onrender.com/Forgotpassword",{email})
             .then(res => {
                 if(res.data.Status === "Success") {
                     alert("Mail has been sent to you on email id : ",email);

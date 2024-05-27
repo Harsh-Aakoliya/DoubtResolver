@@ -27,8 +27,8 @@ const ResetPassword = () => {
     const handleSubmit= async (e)=>{
         e.preventDefault();
         console.log(password);
-        axios.post(`http://localhost:5000/reset_password/${id}/${token}`,{password})
-        // axios.post(`https://stackoverflow-clone-bf06.onrender.com/reset_password/${id}/${token}`,{password})
+        // axios.post(`http://localhost:5000/reset_password/${id}/${token}`,{password})
+        axios.post(`https://stackoverflow-clone-bf06.onrender.com/reset_password/${id}/${token}`,{password})
         .then(res => {
             if(res.data.Status === "Success") {
                 navigate('/Auth')
