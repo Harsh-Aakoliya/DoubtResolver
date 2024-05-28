@@ -46,7 +46,10 @@ const Auth = () => {
         if(email && !password) {alert("Please Enter password"); setIsLoading(false);return;}
         if(!email && password) {alert("Please Enter Email"); setIsLoading(false); return ;}
         if(!email && !password) {alert("Please Enter Email and Password"); setIsLoading(false); return;}
-        if(!isPassValid) {alert("Please enter valid password"); setIsLoading(false);return; };
+        //we only need at signup time so 
+        if(isSignup){
+            if(!isPassValid) {alert("Please enter valid password"); setIsLoading(false);return; };
+        }
         setError('');
     //     if(isSignup){
     //         if(!name){
@@ -99,7 +102,7 @@ const Auth = () => {
     const validatepass=(password)=>{
         let updatedChecks = checks.slice(); // Create a copy of checks array
         const regex_special = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
-        const regex_digit = /\d/;
+        const regex_digit = /^\d+$/;
         (password.length >= 8) ? updatedChecks[0] = true : updatedChecks[0]=false;
         (regex_special.test(password)) ? updatedChecks[1] = true : updatedChecks[1]=false;
         (regex_digit.test(password))? updatedChecks[2] = true : updatedChecks[2]=false;
