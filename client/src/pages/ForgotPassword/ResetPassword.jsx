@@ -102,15 +102,12 @@ const ResetPassword = () => {
                             }} >
                             <span style={{
                             color: `${password === "" ? "solid 1px #0000003e" :(checks[0] ? "green" : "red")}`,
-                            outline: "none"
                         }}>password length must be in between 8 and 15, </span> 
                             <span style={{
                             color: `${password === "" ? "solid 1px #0000003e" :(checks[1] ? "green" : "red")}`,
-                            outline: "none"
                         }}>must contain least one special character, </span> 
                             <span style={{
                             color: `${password === "" ? "solid 1px #0000003e" :(checks[2] ? "green" : "red")}`,
-                            outline: "none"
                         }}>must contain least one digit</span>
                         </p>
                 </label>

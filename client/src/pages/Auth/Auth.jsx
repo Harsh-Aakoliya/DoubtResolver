@@ -102,7 +102,7 @@ const Auth = () => {
     const validatepass=(password)=>{
         let updatedChecks = checks.slice(); // Create a copy of checks array
         const regex_special = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
-        const regex_digit = /^\d+$/;
+        const regex_digit = /\d/;
         (password.length >= 8) ? updatedChecks[0] = true : updatedChecks[0]=false;
         (regex_special.test(password)) ? updatedChecks[1] = true : updatedChecks[1]=false;
         (regex_digit.test(password))? updatedChecks[2] = true : updatedChecks[2]=false;
@@ -165,11 +165,11 @@ const Auth = () => {
                     it should be red  */}
                     {
                         isSignup ? 
-                        <input type='password' name='password' id='password' style={{
+                        <input type='text' name='password' id='password' style={{
                             border: `${password === "" ? "solid 1px #0000003e" :(isPassValid ? "1px solid green" : "1px solid red")}`,
                             outline: "none"
                         }} onChange={(e)=>{setAndValidate(e)}}/> :
-                        <input type='password' name='password' id='password' onChange={(e)=>{setPassword(e.target.value)}} />
+                        <input type='text' name='password' id='password' onChange={(e)=>{setPassword(e.target.value)}} />
                     }   
                     {isSignup && 
                         <p style={{
@@ -178,15 +178,12 @@ const Auth = () => {
                             }} >
                             <span style={{
                             color: `${password === "" ? "solid 1px #0000003e" :(checks[0] ? "green" : "red")}`,
-                            outline: "none"
                         }}>password length must be in between 8 and 15, </span> 
                             <span style={{
                             color: `${password === "" ? "solid 1px #0000003e" :(checks[1] ? "green" : "red")}`,
-                            outline: "none"
                         }}>must contain least one special character, </span> 
                             <span style={{
                             color: `${password === "" ? "solid 1px #0000003e" :(checks[2] ? "green" : "red")}`,
-                            outline: "none"
                         }}>must contain least one digit</span>
                         </p>
                     }   
