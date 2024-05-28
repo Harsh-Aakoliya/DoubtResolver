@@ -171,13 +171,14 @@ const Auth = () => {
                                 border: `${password === "" ? "solid 1px #0000003e" :(isPassValid ? "1px solid green" : "1px solid red")}`,
                                 outline: "none"
                             }} onChange={(e)=>{setAndValidate(e)}}/> 
-                            <input type='checkbox' checked={isChecked} style={
-                            {fontSize:"15px"}
-                            } onClick={()=>{setIsChecked(!isChecked)}}/>show password
-                        </>:
-                        <input type='text' name='password' id='password' onChange={(e)=>{setPassword(e.target.value)}} />
+                        </>
+                        :
+                        <input type={`${isChecked ? "text":"password"}`} name='password' id='password' onChange={(e)=>{setPassword(e.target.value)}} />
                         
                     }   
+                    <input type='checkbox' checked={isChecked} style={
+                    {fontSize:"15px"}
+                    } onClick={()=>{setIsChecked(!isChecked)}}/>show password
                     {isSignup && 
                         <p style={{
                             fontSize:"13px",
