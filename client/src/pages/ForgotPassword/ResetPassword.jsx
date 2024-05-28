@@ -17,6 +17,7 @@ const ResetPassword = () => {
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [isPassValid,setIsPassValid]=useState(false);
+    const [isChecked,setIsChecked]=useState(false);
 
     //this is for different checks that user have to pass while creating password
     //check[0] -> password length must be in between 8 and 15
@@ -92,10 +93,13 @@ const ResetPassword = () => {
                 <h1>Update Password</h1>
                 <label htmlFor='password'>
                     <h4>Enter New Password</h4>
-                    <input type='password' name='password' id='password' style={{
+                    <input type={`${isChecked ? "text":"password"}`} name='password' id='password' style={{
                             border: `${password === "" ? "solid 1px #0000003e" :(isPassValid ? "1px solid green" : "1px solid red")}`,
                             outline: "none"
                     }} onChange={(e)=>{setAndValidate(e)}}/>
+                    <input type='checkbox' checked={isChecked} style={
+                            {fontSize:"15px"}
+                    } onClick={()=>{setIsChecked(!isChecked)}}/>show password
                     <p style={{
                             fontSize:"13px",
                             color: `${password === "" ? "solid 1px #0000003e" :"black"}`

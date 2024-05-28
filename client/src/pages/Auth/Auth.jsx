@@ -26,6 +26,7 @@ const Auth = () => {
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [isPassValid,setIsPassValid]=useState(false);
+    const [isChecked,setIsChecked]=useState(true);
 
     //this is for different checks that user have to pass while creating password
     //check[0] -> password length must be in between 8 and 15
@@ -165,11 +166,17 @@ const Auth = () => {
                     it should be red  */}
                     {
                         isSignup ? 
-                        <input type='text' name='password' id='password' style={{
-                            border: `${password === "" ? "solid 1px #0000003e" :(isPassValid ? "1px solid green" : "1px solid red")}`,
-                            outline: "none"
-                        }} onChange={(e)=>{setAndValidate(e)}}/> :
+                        <>
+                            <input type={`${isChecked ? "text":"password"}`} name='password' id='password' style={{
+                                border: `${password === "" ? "solid 1px #0000003e" :(isPassValid ? "1px solid green" : "1px solid red")}`,
+                                outline: "none"
+                            }} onChange={(e)=>{setAndValidate(e)}}/> 
+                            <input type='checkbox' checked={isChecked} style={
+                            {fontSize:"15px"}
+                            } onClick={()=>{setIsChecked(!isChecked)}}/>show password
+                        </>:
                         <input type='text' name='password' id='password' onChange={(e)=>{setPassword(e.target.value)}} />
+                        
                     }   
                     {isSignup && 
                         <p style={{
