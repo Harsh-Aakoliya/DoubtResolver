@@ -30,6 +30,7 @@ export const fetchAllUsers=()=>async(dispatch)=>{
 
 // for updating profile
 export const updateProfile = (id, updateData) => async (dispatch) => {
+    console.log("2 this is in action folder of frontend",id,updateData);
     try {
         const { data } = await api.updateProfile(id, updateData);
         console.log("Data received after profile update:", data);

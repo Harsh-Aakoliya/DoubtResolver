@@ -49,7 +49,7 @@ export const deleteQuestion = (id,navigate) => async(dispatch) => {
 //id for which is question id, value is weather it is up or down, userId is who want's up and down that vote
 export const voteQuestion =(id,value,userId)=>async(dispatch)=>{
     try {
-        const { data }=api.voteQuestion(id,value,userId);
+        const { data }=await api.voteQuestion(id,value,userId);
         dispatch(fetchAllQuestions());
     } catch (error) {
         console.log(error);
