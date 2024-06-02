@@ -24,11 +24,11 @@
 }
 
 
-.nav-logo{
-    padding: 5px 25px;
-}
+/* .nav-logo{ */
+    /* padding: 5px 25px; */
+/* } */
 .nav-item{
-    margin: 0px 3px;
+    /* margin: 0px 3px; */
     font-size: small;
     font-weight: 500;
     text-decoration: none;
@@ -89,7 +89,14 @@
 
 
 .toggle-button {
-    display: none;
+    /* margin: 50px 0px; */
+    padding: 10px ;
+    background-color: #009dff;
+    border: solid 1px #009dff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s;
+    color: white;
 }
 .hamburger{
     display: none;

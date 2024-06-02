@@ -11,8 +11,14 @@ import thunk from 'redux-thunk'
 
 // 17) so here instead of writting all the reducer we can create another file name as index.js in reducers which have all the reducers 
 import  Reducers  from './reducers';
+import { composeWithDevTools } from 'redux-devtools-extension';
+const composedEnhancer = compose(applyMiddleware(thunk),composeWithDevTools())
 
-const store=createStore(Reducers,compose(applyMiddleware(thunk)));
+// const store = createStore(rootReducer, undefined, composedEnhancer)
+const store = createStore(Reducers,undefined,composedEnhancer);
+
+
+// const store=createStore(Reducers,compose(applyMiddleware(thunk)));
 console.log("inside index.js of src folder",store)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
