@@ -26,6 +26,17 @@ const AskQuestion = () => {
     }
   }
 
+  const [curtag,setCurTag]=useState("");
+  const [alltaglst,setAllTagLst]=useState([]);
+  const handelTagAddSubmit=()=>{
+    if(curtag===''){
+        alert("Plaese write any tag");
+        return;
+    }
+    setAllTagLst(oldalltaglst=>[...oldalltaglst,curtag]);
+    setCurTag("");
+  }
+
   return (
        <div className="ask-question">
             <div className="ask-ques-container">
@@ -47,7 +58,20 @@ const AskQuestion = () => {
                         <label htmlFor="ask-ques-tags">
                             <h4> Title</h4>
                             <p>Add upto 5 tags to enhance result</p>
-                            <input type='text' id='ask-ques-tags' placeholder='e.g. java c html' onChange={(event)=>{setQuestionTags(event.target.value.split(" "))}}/>
+                            {/* <input type='text' id='ask-ques-tags' placeholder='e.g. java c html' onChange={(event)=>{setQuestionTags(event.target.value.split(" "))}}/> */}
+                            
+                            <input type='input' id='ask-ques-tags' placeholder='Enter your tag' value={`${curtag===''?"":`${curtag}`}`} onChange={(e)=>{setCurTag(e.target.value);}}/> 
+                            <button type="button" onClick={()=>{handelTagAddSubmit()}}>Add</button>
+                            
+                            {alltaglst.length}
+                            <div>{alltaglst.map(entry =>
+                            <div>{entry}</div>
+                            )}
+                            </div>
+
+
+
+
                         </label>
                     </div>
                     <input type='submit' value='Review your question' className='review-btn'/>

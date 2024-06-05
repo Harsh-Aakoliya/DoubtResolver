@@ -42,7 +42,10 @@
     resize: vertical; /* only in vertical direction we can expand it*/
 }
 
-
+#ask-ques-tags{
+    width: 100px;
+    height: 10px;
+}
 .review-btn{
     margin: 50px 0px;
     padding: 10px ;
