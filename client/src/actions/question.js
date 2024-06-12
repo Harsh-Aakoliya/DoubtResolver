@@ -5,6 +5,7 @@ import *as api from  '../api'
 //below double arrow function is syntex for redux thunk
 export const askQuestion = (questionData,navigate) =>async (dispatch) => {
     try {
+        console.log("inside askquestion",questionData);
         const {data} =await api.postQuestion(questionData)//this will call the function psotQuestion of index.js in api folder
         dispatch({type:"POST_QUESTION",payload:data}); //sending action to reducer
         //now after asking the question as we click on review my question button we redirect to home page but if we not write dispatch(fetchAllQuestions()) it will not display asked question because we haven't dispatched to home bar so we need to write dispatch(fetchAllQuestions()) before navigating to home bar

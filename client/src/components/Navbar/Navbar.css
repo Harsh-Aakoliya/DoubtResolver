@@ -90,19 +90,20 @@
 
 .toggle-button {
     /* margin: 50px 0px; */
-    padding: 10px ;
-    background-color: #009dff;
-    border: solid 1px #009dff;
-    border-radius: 4px;
-    cursor: pointer;
+    padding: 5px ;
+    border-radius: none;
+    /* background-color: #009dff;
+    border: solid 1px #009dff; */
+    /* border-radius: 0px; */
+    /* cursor: pointer;
     transition: 0.3s;
-    color: white;
+    color: white; */
 }
-.hamburger{
+.temp{
     display: none;
 }
 @media only screen and (max-width: 700px) {
-    .hamburger{
+    .temp{
         display: block;
     }
     .toggle-button {

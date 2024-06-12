@@ -6,6 +6,7 @@ import mongoose from "mongoose"
 //this will store asked question to mongodb data base
 export const AskQuestion = async (req,res) =>{
     const postQuestionData=req.body;  //title,body and tags reterived from front end
+    console.log(req.body.questionList);
     const postQuestion=new Questions(postQuestionData); //now creating new object with Schema as Questions (which we have imported from model) with data as postQuesitonData
     try{
         await postQuestion.save(); //saving to moongoDB

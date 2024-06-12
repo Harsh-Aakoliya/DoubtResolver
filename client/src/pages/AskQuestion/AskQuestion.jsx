@@ -8,6 +8,8 @@ const AskQuestion = () => {
   const [questionTitle,setQuestionTitle]=useState("");
   const [questionBody,setQuestionBody]=useState("");
   const [questionTags,setQuestionTags]=useState("");
+  const [curtag,setCurTag]=useState("");
+  const [alltaglst,setAllTagLst]=useState([]);
 
 
   const dispatch=useDispatch();
@@ -17,7 +19,8 @@ const AskQuestion = () => {
   const handleSubmit=(e)=>{
     e.preventDefault();
     // console.log({questionTitle,questionBody,questionTags});
-    dispatch(askQuestion({questionTitle,questionBody,questionTags,userPosted: User.result.name, userId:User?.result?._id},navigate)) //at the time of dispatching we need an action here it is in question.js of action folder here for parameter as userId : User?.result?._id we can also use userId : User.result._id 
+    // dispatch(askQuestion({questionTitle,questionBody,questionTags,userPosted: User.result.name, userId:User?.result?._id},navigate)) //at the time of dispatching we need an action here it is in question.js of action folder here for parameter as userId : User?.result?._id we can also use userId : User.result._id 
+    dispatch(askQuestion({questionTitle,questionBody,questionTags:alltaglst,userPosted: User.result.name, userId:User?.result?._id},navigate)) //at the time of dispatching we need an action here it is in question.js of action folder here for parameter as userId : User?.result?._id we can also use userId : User.result._id 
 
   }
   const handleEnter=(e)=>{
@@ -26,8 +29,6 @@ const AskQuestion = () => {
     }
   }
 
-  const [curtag,setCurTag]=useState("");
-  const [alltaglst,setAllTagLst]=useState([]);
   const handelTagAddSubmit=()=>{
     if(curtag===''){
         alert("Plaese write any tag");
