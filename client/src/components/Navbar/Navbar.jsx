@@ -256,6 +256,7 @@ const Navbar = () => {
         }
     }, [sidebarRef]);
 
+    
     return (
         <nav className='main-nav'>
             <div className='temp'>
