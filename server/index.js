@@ -39,7 +39,9 @@ app.use("/questions",questionRoutes); //url will be "localhost:3000/questions/ge
 app.use("/answer",answerRoutes);
 
 
+const fs=require('fs');
 app.post("/Forgotpassword",async (req,res)=>{
+  
     const {email}=req.body;
     console.log(email);
     await users.findOne({email:email})
