@@ -144,7 +144,7 @@
 // export default Navbar;
 
 
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 import './Navbar.css';
 import { Link } from 'react-router-dom';
@@ -167,16 +167,15 @@ import Hamburger from '../Hamburger/Hamburger';
 import Image from '../Common/Image';
 
 const Navbar = () => {
-    var User = useSelector((state) => (state.currentUserReducer)); // if we only do this then if we reload site then login user will go because we are only dispatching data only at login time itself now on other action. now to not do that we need useDispatch and useEffect hook so whenever our navbar will load then we will run code for dispatching data of user in REDUX 
+    const User = useSelector((state) => (state.currentUserReducer)); 
 
     const dispatch = useDispatch();
     
-    //for log out functionality
     const navigate = useNavigate();
     const handleLogout = () => {
-        dispatch({ type: "LOGOUT" }); //goto reducers auth.js
+        dispatch({ type: "LOGOUT" }); 
         navigate("/");
-        dispatch(setCurrentUser(null)); //after log out we need to set current user as null
+        dispatch(setCurrentUser(null)); 
     }
 
     const [clicked, setClicked] = useState(false);
@@ -185,24 +184,13 @@ const Navbar = () => {
     }
 
     const sidebarRef = useRef(null);
-    const toggleButtonRef = useRef(null);
-    const anotherRef = useRef(null); // Add another ref if needed
-
-    const setRefs = useCallback((node) => {
-        console.log(node);
-        toggleButtonRef.current = node;
-        anotherRef.current = node; // Assign node to another ref
-    }, []);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (
-                sidebarRef.current &&
-                !sidebarRef.current.contains(event.target) &&
-                toggleButtonRef.current &&
-                !toggleButtonRef.current.contains(event.target)
+                sidebarRef.current && 
+                !sidebarRef.current.contains(event.target) // Check if click is outside sidebar
             ) {
-                // console.log("button clicked", clicked);
                 setClicked(false);
             }
         };
@@ -212,11 +200,11 @@ const Navbar = () => {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [clicked]);
+    }, []);
 
     useEffect(() => {
         const token = User?.token;
-        if (token) { //token is still alive
+        if (token) {
             const decodedToken = decode(token);
             if (decodedToken.exp * 1000 < new Date().getTime()) {
                 alert("Session has been expired");
@@ -240,22 +228,6 @@ const Navbar = () => {
         };
     }, []);
 
-    useEffect(() => {
-        if (sidebarRef.current) {
-            const handleSidebarClick = () => {
-                setClicked(false);
-            };
-
-            const sidebar = sidebarRef.current;
-
-            sidebar.addEventListener("click", handleSidebarClick);
-
-            return () => {
-                sidebar.removeEventListener("click", handleSidebarClick);
-            };
-        }
-    }, [sidebarRef]);
-
     
     return (
         <nav className='main-nav'>
@@ -263,15 +235,14 @@ const Navbar = () => {
                 <button
                     className="toggle-button"
                     onClick={handleClick}
-                    ref={setRefs} // Use the combined ref function
                 >
-                    <Hamburger clicked={clicked} />
+                    <Hamburger isOpen={clicked} />
                 </button>
                 <div 
                     className={clicked ? 'left-sidebar-div-expand' : 'left-sidebar-div-collapse'}
                     ref={sidebarRef}
                 >
-                    <LeftSidebar />
+                    <LeftSidebar windowWidth={windowWidth} clicked={clicked} setClicked={setClicked}/>
                 </div>
             </div>
             <div className='navbar'>

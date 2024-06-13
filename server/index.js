@@ -40,6 +40,7 @@ app.use("/answer",answerRoutes);
 
 
 app.post("/Forgotpassword",async (req,res)=>{
+  
     const {email}=req.body;
     console.log(email);
     await users.findOne({email:email})
