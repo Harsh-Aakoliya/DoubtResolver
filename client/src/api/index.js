@@ -1,7 +1,7 @@
 //this file is for handle request for send data and retrive data from backend
 import axios from 'axios'
-// const API=axios.create({baseURL : "https://stackoverflow-clone-bf06.onrender.com"})
-const API=axios.create({baseURL : "http://localhost:5000"})
+const API=axios.create({baseURL : "https://stackoverflow-clone-bf06.onrender.com"})
+// const API=axios.create({baseURL : "http://localhost:5000"})
     
 
 //by below code we are incresing the security of our all the request
