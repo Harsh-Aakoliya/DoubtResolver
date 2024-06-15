@@ -25,7 +25,7 @@ const Forgotpassword = () => {
     
     const handleSubmit= async (e)=>{
         e.preventDefault();
-        console.log("all the users",users);
+        // console.log("all the users",users);
         let found=false;
         users.map((user)=>{
             if(user.email === email){
@@ -33,8 +33,8 @@ const Forgotpassword = () => {
             }
         })
         if(found){
-            // axios.post("http://localhost:5000/Forgotpassword",{email})
-            axios.post("https://stackoverflow-clone-bf06.onrender.com/Forgotpassword",{email})
+            axios.post("http://localhost:5000/Forgotpassword",{email})
+            // axios.post("https://stackoverflow-clone-bf06.onrender.com/Forgotpassword",{email})
             .then(res => {
                 if(res.data.Status === "Success") {
                     alert("Mail has been sent to you on email id : ",email);

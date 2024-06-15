@@ -21,20 +21,20 @@ const EditProfileForm = ({currentUser,setSwitch}) => {
 
 
     const handleFileInputChange = (e) => {
-        console.log("logging event",e);
-        console.log("all the files",e.target.files)
+        // console.log("logging event",e);
+        // console.log("all the files",e.target.files)
         const file = e.target.files[0];//from multi upload grab the first one
-        console.log("logging the file",file);
+        // console.log("logging the file",file);
         previewFile(file);//user can see what they want to upload
         setSelectedFile(file);
         setFileInputState(e.target.value);
-        console.log("selected file is ",selectedFile);
+        // console.log("selected file is ",selectedFile);
     };
     const previewFile = (file) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);//converting image to url
         reader.onloadend = () => {
-            console.log("Rendering the result",reader.result)
+            // console.log("Rendering the result",reader.result)
             setPreviewSource(reader.result);//as soon as file being uploaded we will change the preview state
         };
     };
@@ -47,8 +47,8 @@ const EditProfileForm = ({currentUser,setSwitch}) => {
         //we can write below login
         // if(!selectedFile) 
         // console.log(currentUser);
-        console.log("1 Dispatching name,abount,tags and preview souce from frontend");
-        console.log("after 1",previewSource);
+        // console.log("1 Dispatching name,abount,tags and preview souce from frontend");
+        // console.log("after 1",previewSource);
         if(tags.length === 0){
             dispatch(updateProfile(currentUser?.result?._id,{name,about,tags:currentUser?.result?.tags,previewSource})); //if tags are not given by user then we will send tags that is already avilable to that profile
         }

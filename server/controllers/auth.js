@@ -39,7 +39,7 @@ export const login =async(req,res)=>{
         const existinguser=await users.findOne({email});
         
         if(!existinguser){
-            console.log("user not found");
+            // console.log("user not found");
             // alert("User Not found");
             return res.status(404).json({message:"User dosen't exist..."});//if user not exist then return message
         }
@@ -47,7 +47,7 @@ export const login =async(req,res)=>{
         const isPasswordCrt=await bcrypt.compare(password,existinguser.password);
         
         if(!isPasswordCrt){
-            console.log("Password is incorrect");
+            // console.log("Password is incorrect");
             return res.status(400).json({message:"Invalid credentials Password not match"});
         }
 

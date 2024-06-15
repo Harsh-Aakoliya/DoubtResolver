@@ -3,10 +3,11 @@ import Questions from "../models/Questions.js"
 import mongoose from "mongoose"
 
 
+
 //this will store asked question to mongodb data base
 export const AskQuestion = async (req,res) =>{
     const postQuestionData=req.body;  //title,body and tags reterived from front end
-    console.log(req.body.questionList);
+    // console.log(req.body.questionList);
     const postQuestion=new Questions(postQuestionData); //now creating new object with Schema as Questions (which we have imported from model) with data as postQuesitonData
     try{
         await postQuestion.save(); //saving to moongoDB
@@ -16,7 +17,7 @@ export const AskQuestion = async (req,res) =>{
         console.log(error);
         res.status(409).json("could not post new question");
     }
-
+            
 }
 
 //thsi will return all the existing question to frontend

@@ -1,7 +1,7 @@
 //this file is for handle request for send data and retrive data from backend
 import axios from 'axios'
-const API=axios.create({baseURL : "https://stackoverflow-clone-bf06.onrender.com"})
-// const API=axios.create({baseURL : "http://localhost:5000"})
+// const API=axios.create({baseURL : "https://stackoverflow-clone-bf06.onrender.com"})
+const API=axios.create({baseURL : "http://localhost:5000"})
     
 
 //by below code we are incresing the security of our all the request
@@ -29,6 +29,7 @@ export const signUp=(authData)=>API.post("/user/signup",authData);
 
 export const postQuestion=(questionData)=>API.post("/questions/Ask",questionData);
 export const getAllQuestions = () => API.get("/questions/get"); //so when ever getAllQuestions function will be called then this will retrive all the data from database and return it
+
 //for deleting question
 export const deleteQuestion = (id) => API.delete(`/questions/delete/${id}`);
 
@@ -54,3 +55,7 @@ export const updateProfile =(id,updateData)=>API.patch(`/user/update/${id}`,upda
 
 
 export const forgotPassword=(email)=>API.post(`/Forgotpassword`,email);
+
+
+export const fetchAllTags=()=>API.get("/tags/getAllTags");
+export const addNewTag=(allTags)=>API.post("/tags/addTags",allTags);

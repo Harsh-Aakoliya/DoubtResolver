@@ -111,16 +111,16 @@ const Auth = () => {
         setChecks(updatedChecks);
     
         const trueCount = updatedChecks.filter(Boolean).length;
-        console.log(updatedChecks, trueCount);
+        // console.log(updatedChecks, trueCount);
         return trueCount === 3;
     }
     const setAndValidate=(e)=>{
         setPassword(e.target.value);
-        console.log("1",password,validatepass(password))
+        // console.log("1",password,validatepass(password))
         // if(validatepass(password)){
-            console.log("2 here")
+            // console.log("2 here")
             setIsPassValid(validatepass(e.target.value));
-            console.log("3",isPassValid);
+            // console.log("3",isPassValid);
         // }
     }
 

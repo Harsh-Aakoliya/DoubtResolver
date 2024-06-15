@@ -2,44 +2,10 @@ import React, {useState,useEffect} from 'react'
 import LeftSidebar from '../../components/LeftSidebar/LeftSidebar'
 import TagsList from './TagsList'
 import "./Tags.css"
+import { useSelector } from 'react-redux'
 const Tags = () => {
-    const tagsList=[
-        {
-            id:1,
-            tagName:"first",
-            tagDesc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, fugit?"
-        },
-        {
-            id:2,
-            tagName:"second",
-            tagDesc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, fugit?"
-        },
-        {
-            id:3,
-            tagName:"third",
-            tagDesc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, fugit?"
-        },
-        {
-            id:4,
-            tagName:"four",
-            tagDesc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, fugit?"
-        },
-        {
-            id:5,
-            tagName:"five",
-            tagDesc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, fugit?"
-        },
-        {
-            id:6,
-            tagName:"six",
-            tagDesc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, fugit?"
-        },
-        {
-            id:7,
-            tagName:"seven",
-            tagDesc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, fugit?"
-        }
-    ];
+    const tagsList=useSelector((state)=>state.tagReducer)
+        console.log("All available tags are ",tagsList);
 
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -60,8 +26,7 @@ const Tags = () => {
     { windowWidth>=700 && <LeftSidebar/>}
         <div className="home-container-2">
             <h1 className='tags-h1'>Tags</h1>
-            <p className='tags-p'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem, enim?</p>
-            <p className='tags-p'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perferendis dolorum nesciunt quos.</p>
+            <p className='tags-p'>A tag is a keyword or label that categorizes your question with other, similar questions. Using the right tags makes it easier for others to find and answer your question.</p>
             <div className="tags-list-container">
                 {
                     tagsList.map((tag)=>(

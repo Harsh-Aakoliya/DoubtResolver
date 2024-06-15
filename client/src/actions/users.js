@@ -2,7 +2,7 @@ import * as api from "../api"
 export const fetchAllUsers=()=>async(dispatch)=>{
     try {
         const {data}=await api.fetchAllUsers();//we will get all the users using api request and stored into data
-        console.log("fetchallusers",data);
+        // console.log("fetchallusers",data);
         dispatch({type:"FETCH_USERS",  payload:data });//storing data to REDUX
 
     } catch (error) {
@@ -30,10 +30,10 @@ export const fetchAllUsers=()=>async(dispatch)=>{
 
 // for updating profile
 export const updateProfile = (id, updateData) => async (dispatch) => {
-    console.log("2 this is in action folder of frontend",id,updateData);
+    // console.log("2 this is in action folder of frontend",id,updateData);
     try {
         const { data } = await api.updateProfile(id, updateData);
-        console.log("Data received after profile update:", data);
+        // console.log("Data received after profile update:", data);
 
         dispatch({ type: "UPDATE_CURRENT_USER", payload: data });
     } catch (error) {

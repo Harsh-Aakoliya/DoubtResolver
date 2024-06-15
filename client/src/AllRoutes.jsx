@@ -10,6 +10,7 @@ import Users from "./pages/Users/Users"
 import UserProfile from './pages/UserProfile/UserProfile'
 import Forgotpassword from './pages/ForgotPassword/Forgotpassword'
 import ResetPassword from './pages/ForgotPassword/ResetPassword'
+import TagProfile from './pages/Tags/TagProfile'
 const AllRoutes = () => {
   return (
     <div>
@@ -20,8 +21,6 @@ const AllRoutes = () => {
             <Route path='/AskQuestion' element={<AskQuestion/>}></Route>
              {/* he said /:id can be anything like any number of digits */}
             <Route path='/Questions/:id' element={<DisplayQuestion/>}></Route>
-            {/* for tags page */}
-            <Route path="/Tags" element={<Tags />}/>
 
             {/* for all the users page */}
             <Route path="/Users" element={<Users />}/>
@@ -33,6 +32,10 @@ const AllRoutes = () => {
 
             <Route path="/reset_password/:id/:token" element={<ResetPassword />}></Route>
 
+            {/* for tags page */}
+            <Route path="/Tags" element={<Tags />}/>
+            {/* for each tag */}
+            <Route path="/Tags/:id" element={<TagProfile />}></Route>
         </Routes>
 
     </div>

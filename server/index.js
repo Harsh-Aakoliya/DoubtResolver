@@ -8,6 +8,10 @@ import answerRoutes from "./routes/Answers.js"
 
 
 
+
+//for tages
+import Tags from "./models/tags.js";
+
 //for email
 import users from "./models/auth.js"
 import jwt from "jsonwebtoken"
@@ -39,17 +43,53 @@ app.use("/questions",questionRoutes); //url will be "localhost:3000/questions/ge
 app.use("/answer",answerRoutes);
 
 
+
+
+
+
+app.get("/tags/getAllTags",async (req,res)=> {
+    try {
+      const tagList=await Tags.find();//it will store all the questions from Question schema from database to questionList variable
+      // console.log(questionList);
+      res.status(200).json(tagList); //sending data to frontend
+  } catch (error) {
+      console.log("error printing in backend",error.message);
+      res.status(404).json({message : error.message});
+  }
+})
+
+
+app.post("/tags/addTags",async (req,res)=>{
+  try{
+    console.log("got request to insert this tags",req.body);
+
+    const addTagsData=req.body;  //title,body and tags reterived from front end
+    console.log("at server side getting all the tags that needs to be added",addTagsData);
+    const addTags=new Tags(addTagsData); //now creating new object with Schema as Questions (which we have imported from model) with data as postQuesitonData
+    await addTags.save(); //saving to moongoDB
+    res.status(200).json(`${addTagsData.tagTitle} added successfully`);
+  }catch(error){
+    console.log("getting some error while inserting new tags in to DB",error);
+  }
+})
+
+
+
+
+
+
+
 app.post("/Forgotpassword",async (req,res)=>{
   
     const {email}=req.body;
-    console.log(email);
+    // console.log(email);
     await users.findOne({email:email})
     .then(user=>{
         if(!user){
             return res.send({Status: "User not existed from backend"});
         }
         // alert("mail send");
-        console.log("a;slkfjas;dlkfja;sdkfja;sldjfa;sdfja;sdkjf");
+        // console.log("a;slkfjas;dlkfja;sdkfja;sldjfa;sdfja;sdkjf");
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, {expiresIn: "1d"})
         var transporter = nodemailer.createTransport({
             service: 'gmail',
@@ -64,8 +104,8 @@ app.post("/Forgotpassword",async (req,res)=>{
             from: 'harshaakoliya20@gmail.com',
             to: user.email,
             subject: 'Reset Password Link', 
-            text: `https://doubt-resolver.netlify.app/reset_password/${user._id}/${token}`
-            // text: `http://localhost:3000/reset_password/${user._id}/${token}`
+            // text: `https://doubt-resolver.netlify.app/reset_password/${user._id}/${token}`
+            text: `http://localhost:3000/reset_password/${user._id}/${token}`
           };
           
           transporter.sendMail(mailOptions, function(error, info){
@@ -85,13 +125,13 @@ app.post("/reset_password/:id/:token",async(req,res)=>{
         if(err) {
             return res.json({Status: "Error with token"})
         } else {
-          console.log("new password with out hash is ",password);
+          // console.log("new password with out hash is ",password);
           bcrypt.hash(password, 12)
             .then(hash => {
                users.findByIdAndUpdate({_id: id}, {password: hash})
                 .then(u => {
                   res.send({Status: "Success"})
-                  console.log("updated successfully ");
+                  // console.log("updated successfully ");
                 })
                 .catch(err => res.send({Status: err}))
             })

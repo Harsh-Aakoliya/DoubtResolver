@@ -21,6 +21,7 @@ import Hamburger from '../Hamburger/Hamburger';
 import Image from '../Common/Image';
 
 const Navbar = () => {
+    
     const User = useSelector((state) => (state.currentUserReducer)); 
 
     const dispatch = useDispatch();

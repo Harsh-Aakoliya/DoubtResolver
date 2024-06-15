@@ -35,10 +35,10 @@ export const getAllUsers=async(req,res)=>{
 
 //for updating profile
 export const updateProfile = async(req,res) =>{
-    console.log("Here in updateProfile ")
+    // console.log("Here in updateProfile ")
     const {id:_id}=req.params;
     const {name,about,tags,previewSource} =req.body;//all the name must be sams as req
-    console.log("body at server after clicking save profile ",req.body);
+    // console.log("body at server after clicking save profile ",req.body);
     
     
     // const {cloudinary}=require('../utils/cloudinary.js')//do this if we frequently require the cloudinary 
@@ -47,7 +47,7 @@ export const updateProfile = async(req,res) =>{
     try{
 
         uploadedResponse = await cloudinary.uploader.upload(previewSource)
-        console.log("this is uploaded response",uploadedResponse);  
+        // console.log("this is uploaded response",uploadedResponse);  
     }
     catch(error){
         console.log("This is the error while uploading profile photo",error);
@@ -67,10 +67,10 @@ export const updateProfile = async(req,res) =>{
     //     return res.status(404).json({message:error.message});
     // }
     try {
-        console.log("trying to updatad user profile");
-        console.log(uploadedResponse.url);
+        // console.log("trying to updatad user profile");
+        // console.log(uploadedResponse.url);
         const updatedProfile=await User.findByIdAndUpdate(_id, {$set: {"name":name, "about":about,"tags":tags,"profilePhoto":uploadedResponse.url}},{new:true}); //now new:true means if we don't give new:true it will update profile to database but it will return old profile with out updated but here new:true so it will return profile after updating
-        console.log(updatedProfile);
+        // console.log(updatedProfile);
 
         res.status(200).json(updatedProfile);
 

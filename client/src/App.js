@@ -13,15 +13,18 @@ import { fetchAllQuestions } from './actions/question';
 
 //for displaying all the users when our application starts
 import { fetchAllUsers } from './actions/users';
+import { fetchAllTags } from './actions/tags';
+
 
 function App(){
-
+    // debugger
     const dispatch =useDispatch();
+    console.log(dispatch);
     useEffect(() => {
         dispatch(fetchAllQuestions()) //get request to database
         dispatch(fetchAllUsers());
+        dispatch(fetchAllTags());
     }, [dispatch]); //so in dependency array we have [dispatch] so when ever disptch will be used then it will call this fetchAllQuestions() 
-
 
 
 

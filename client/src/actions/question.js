@@ -1,12 +1,15 @@
 import React from 'react'
 import *as api from  '../api'
 
+
+
 //when ever we trigger button review question of askquestion page it will call this function
 //below double arrow function is syntex for redux thunk
 export const askQuestion = (questionData,navigate) =>async (dispatch) => {
     try {
-        console.log("inside askquestion",questionData);
+        // console.log("inside askquestion",questionData);
         const {data} =await api.postQuestion(questionData)//this will call the function psotQuestion of index.js in api folder
+        console.log("there in action file after posting the questtion ",data);
         dispatch({type:"POST_QUESTION",payload:data}); //sending action to reducer
         //now after asking the question as we click on review my question button we redirect to home page but if we not write dispatch(fetchAllQuestions()) it will not display asked question because we haven't dispatched to home bar so we need to write dispatch(fetchAllQuestions()) before navigating to home bar
         dispatch(fetchAllQuestions());
@@ -21,7 +24,7 @@ export const askQuestion = (questionData,navigate) =>async (dispatch) => {
 
 //for calling this there is no button --> like if we click on this button then it will call this function and we will display all the existing question from data base instead of that if whenever our applicaiton being live then we need to call this function for displying all the question so we can use useEffect hook in App.js file itself
 export const fetchAllQuestions = () => async (dispatch) =>{
-    console.log("data has been fetched");
+    // console.log("data has been fetched");
     try {
         const {data}= await api.getAllQuestions();
         dispatch({type: "FETCH_ALL_QUESTIONS",payload : data}) //storing data to REDUX store

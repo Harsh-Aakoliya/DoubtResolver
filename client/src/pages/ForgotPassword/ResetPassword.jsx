@@ -34,13 +34,13 @@ const ResetPassword = () => {
     
     const handleSubmit= async (e)=>{
         e.preventDefault();
-        console.log(password);
+        // console.log(password);
         if(!isPassValid) {
             alert("Please create valid password");
             return;
         }
-        // axios.post(`http://localhost:5000/reset_password/${id}/${token}`,{password})
-        axios.post(`https://stackoverflow-clone-bf06.onrender.com/reset_password/${id}/${token}`,{password})
+        axios.post(`http://localhost:5000/reset_password/${id}/${token}`,{password})
+        // axios.post(`https://stackoverflow-clone-bf06.onrender.com/reset_password/${id}/${token}`,{password})
         .then(res => {
             if(res.data.Status === "Success") {
                 navigate('/Auth')
@@ -59,7 +59,7 @@ const ResetPassword = () => {
         setChecks(updatedChecks);
     
         const trueCount = updatedChecks.filter(Boolean).length;
-        console.log(updatedChecks, trueCount);
+        // console.log(updatedChecks, trueCount);
         return trueCount === 3;
     }
     const setAndValidate=(e)=>{
@@ -69,11 +69,11 @@ const ResetPassword = () => {
             setChecks([false,false,false]);
             return ;
         }
-        console.log("1",password,validatepass(password))
+        // console.log("1",password,validatepass(password))
         // if(validatepass(password)){
-            console.log("2 here")
+            // console.log("2 here")
             setIsPassValid(validatepass(e.target.value));
-            console.log("3",isPassValid);
+            // console.log("3",isPassValid);
         // }
     }
 
