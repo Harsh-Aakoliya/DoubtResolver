@@ -73,8 +73,72 @@ app.post("/tags/addTags",async (req,res)=>{
   }
 })
 
+// //for updating profile
+// export const updateProfile = async(req,res) =>{
+//   // console.log("Here in updateProfile ")
+//   const {id:_id}=req.params;
+//   const {name,about,tags,previewSource} =req.body;//all the name must be sams as req
+//   // console.log("body at server after clicking save profile ",req.body);
+  
+  
+//   // const {cloudinary}=require('../utils/cloudinary.js')//do this if we frequently require the cloudinary 
+//   //uploading to cloudinary
+//   let uploadedResponse={};
+//   try{
 
+//       uploadedResponse = await cloudinary.uploader.upload(previewSource)
+//       // console.log("this is uploaded response",uploadedResponse);  
+//   }
+//   catch(error){
+//       console.log("This is the error while uploading profile photo",error);
+//   }
+  
 
+  
+//   // given id is valid or not
+//   // try{
+
+//   if(!mongoose.Types.ObjectId.isValid(_id)){
+//       return res.status(404).send("profile with this id is not avilable");
+//   }
+
+//   // }
+//   // catch(error){
+//   //     return res.status(404).json({message:error.message});
+//   // }
+//   try {
+//       // console.log("trying to updatad user profile");
+//       // console.log(uploadedResponse.url);
+//       const updatedProfile=await User.findByIdAndUpdate(_id, {$set: {"name":name, "about":about,"tags":tags,"profilePhoto":uploadedResponse.url}},{new:true}); //now new:true means if we don't give new:true it will update profile to database but it will return old profile with out updated but here new:true so it will return profile after updating
+//       console.log("at server updatedProfile",updatedProfile);
+
+//       res.status(200).json(updatedProfile);
+
+//   } catch (error) {
+//       console.log(error);
+//       res.status(404).json({message:error.message});
+//   }
+// }
+
+app.patch("/tags/update/:id",async (req,res)=>{
+  try {
+        const {id:_id}=req.params;
+        console.log("got request to update tag ",req.body.tagTitle);
+        const tagToUpdate=req.body;
+        const newQuestions = Array.isArray(req.body.allQuestions) ? req.body.allQuestions : [req.body.allQuestions];
+
+        const updatedTag = await Tags.findByIdAndUpdate(
+          _id, 
+          { $push: { allQuestions: { $each: newQuestions } } },
+          { new: true }
+        );
+        res.status(200).json(updatedTag);
+      } 
+      catch (error) {
+        console.log(error);
+      res.status(404).json({message:error.message});
+    }
+})
 
 
 
@@ -104,8 +168,8 @@ app.post("/Forgotpassword",async (req,res)=>{
             from: 'harshaakoliya20@gmail.com',
             to: user.email,
             subject: 'Reset Password Link', 
-            text: `https://doubt-resolver.netlify.app/reset_password/${user._id}/${token}`
-            // text: `http://localhost:3000/reset_password/${user._id}/${token}`
+            // text: `https://doubt-resolver.netlify.app/reset_password/${user._id}/${token}`
+            text: `http://localhost:3000/reset_password/${user._id}/${token}`
           };
           
           transporter.sendMail(mailOptions, function(error, info){

@@ -19,7 +19,7 @@ import { fetchAllTags } from './actions/tags';
 function App(){
     // debugger
     const dispatch =useDispatch();
-    console.log(dispatch);
+    // console.log(dispatch);
     useEffect(() => {
         dispatch(fetchAllQuestions()) //get request to database
         dispatch(fetchAllUsers());

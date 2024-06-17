@@ -4,6 +4,8 @@ const tagReducer=(state=[],action)=>{
             return action.payload;
         case "POST_TAGS":
             return {...state};
+        case "UPDATE_TAGS":
+            return state.map((tag) => (tag._id === action.payload._id) ? { ...tag, ...action.payload } : tag);
         default:
             return state;
     }

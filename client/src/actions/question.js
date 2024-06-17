@@ -14,6 +14,7 @@ export const askQuestion = (questionData,navigate) =>async (dispatch) => {
         //now after asking the question as we click on review my question button we redirect to home page but if we not write dispatch(fetchAllQuestions()) it will not display asked question because we haven't dispatched to home bar so we need to write dispatch(fetchAllQuestions()) before navigating to home bar
         dispatch(fetchAllQuestions());
         navigate("/");
+        return data;
     } catch (error) {
         console.log(error);
     }
@@ -23,7 +24,9 @@ export const askQuestion = (questionData,navigate) =>async (dispatch) => {
 
 
 //for calling this there is no button --> like if we click on this button then it will call this function and we will display all the existing question from data base instead of that if whenever our applicaiton being live then we need to call this function for displying all the question so we can use useEffect hook in App.js file itself
-export const fetchAllQuestions = () => async (dispatch) =>{
+export const fetchAllQuestions = (props) => async (dispatch) =>{
+    console.log("Got request to fetchall the questions",props?.message)
+
     // console.log("data has been fetched");
     try {
         const {data}= await api.getAllQuestions();

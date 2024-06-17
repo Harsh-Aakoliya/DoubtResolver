@@ -4,21 +4,44 @@ import mongoose from "mongoose"
 
 
 
-//this will store asked question to mongodb data base
-export const AskQuestion = async (req,res) =>{
-    const postQuestionData=req.body;  //title,body and tags reterived from front end
-    // console.log(req.body.questionList);
-    const postQuestion=new Questions(postQuestionData); //now creating new object with Schema as Questions (which we have imported from model) with data as postQuesitonData
-    try{
-        await postQuestion.save(); //saving to moongoDB
-        res.status(200).json("Posted a question successfully");
-    }
-    catch(error){
-        console.log(error);
-        res.status(409).json("could not post new question");
-    }
+// //this will store asked question to mongodb data base
+// export const AskQuestion = async (req,res) =>{
+//     const postQuestionData=req.body;  //title,body and tags reterived from front end
+//     // console.log(req.body.questionList);
+//     const postQuestion=new Questions(postQuestionData); //now creating new object with Schema as Questions (which we have imported from model) with data as postQuesitonData
+//     try{
+//         await postQuestion.save(); //saving to moongoDB
+//         res.status(200).json("Posted a question successfully");
+//     }
+//     catch(error){
+//         console.log(error);
+//         res.status(409).json("could not post new question");
+//     }
             
-}
+// }
+
+
+// server/controllers/question.js
+
+
+export const AskQuestion = async (req, res) => {
+    const postQuestionData = req.body; // title, body, and tags retrieved from frontend
+
+    try {
+        const postQuestion = new Questions(postQuestionData); // create a new Questions object
+
+        await postQuestion.save(); // save to MongoDB
+
+        // Fetch the saved question from database to ensure you have the complete object with generated _id
+        const savedQuestion = await Questions.findById(postQuestion._id);
+        console.log("newly pushed question returnign to frontend",savedQuestion);
+        res.status(200).json(savedQuestion); // return the saved question object
+    } catch (error) {
+        console.log(error);
+        res.status(409).json({ message: "Could not post new question", error: error.message });
+    }
+};
+
 
 //thsi will return all the existing question to frontend
 

@@ -70,7 +70,7 @@ export const updateProfile = async(req,res) =>{
         // console.log("trying to updatad user profile");
         // console.log(uploadedResponse.url);
         const updatedProfile=await User.findByIdAndUpdate(_id, {$set: {"name":name, "about":about,"tags":tags,"profilePhoto":uploadedResponse.url}},{new:true}); //now new:true means if we don't give new:true it will update profile to database but it will return old profile with out updated but here new:true so it will return profile after updating
-        // console.log(updatedProfile);
+        console.log("at server updatedProfile",updatedProfile);
 
         res.status(200).json(updatedProfile);
 

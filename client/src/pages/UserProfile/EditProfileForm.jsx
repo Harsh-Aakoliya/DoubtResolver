@@ -39,7 +39,7 @@ const EditProfileForm = ({currentUser,setSwitch}) => {
         };
     };
 
-    store.subscribe(()=>console.log("state has been updated and updated state is ",store.getState()))
+    // store.subscribe(()=>console.log("state has been updated and updated state is ",store.getState()))
 
     const dispatch=useDispatch();
     const handleSubmit =(e)=>{

@@ -1,30 +1,35 @@
-//this will be for particular user 
-import React from 'react'
-import { Link, useParams } from 'react-router-dom'
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import './TagProfile.css';
 
 const TagProfile = () => {
-  const tagProfile={
-      _id:1,  
-      tagTitle:"Javascript",
-      tagBody:"This is body of javascript",
-      questionsId:[
-        1,2,3,4
-      ]
-    };
-    const {id}=useParams();
-    console.log("id of tag that you want to see it's profile",id);
+    const tags = useSelector((state) => state.tagReducer);
+    console.log("All the tags in TagProfile", tags);
+  
+    const { id } = useParams();
+    console.log("ID of tag that you want to see its profile", id);
+
+    const tag = tags.find(tag => tag._id === id);
+
+    // Check if tag is undefined
+    if (!tag) {
+        return (
+            <div className="loading-container">
+                <h4>Loading.....</h4>
+            </div>
+        );
+    }
+
     return (
-    <div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <h3>{tagProfile.tagTitle}</h3>
-        <h5>{tagProfile.tagBody}</h5>
-        //here we have to map all the question that contain this tag
-    </div>
-  )
+        <div className="tag-profile-container">
+            <h2>Tag Profile</h2>
+            {/* <p><strong>ID:</strong> {tag._id}</p> */}
+            <p><strong>Title:</strong> {tag.tagTitle}</p>
+            <p><strong>Description:</strong> {tag.tagDescription}</p>
+            <p><strong>Created On:</strong> {new Date(tag.createdOn).toLocaleDateString()}</p>
+        </div>
+    );
 }
 
-export default TagProfile
+export default TagProfile;

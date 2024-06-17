@@ -1,0 +1,32 @@
+/* TagProfile.css */
+.tag-profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin-top: 50px;
+}
+
+.tag-profile-container h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.tag-profile-container p {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #555;
+}
+
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.loading-container h4 {
+    font-size: 24px;
+    color: #999;
+}
