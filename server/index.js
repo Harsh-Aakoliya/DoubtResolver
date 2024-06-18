@@ -168,8 +168,8 @@ app.post("/Forgotpassword",async (req,res)=>{
             from: 'harshaakoliya20@gmail.com',
             to: user.email,
             subject: 'Reset Password Link', 
-            // text: `https://doubt-resolver.netlify.app/reset_password/${user._id}/${token}`
-            text: `http://localhost:3000/reset_password/${user._id}/${token}`
+            // text: `http://localhost:3000/reset_password/${user._id}/${token}`
+            text: `https://doubt-resolver.netlify.app/reset_password/${user._id}/${token}`
           };
           
           transporter.sendMail(mailOptions, function(error, info){
