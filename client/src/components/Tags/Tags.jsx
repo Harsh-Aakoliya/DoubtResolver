@@ -12,7 +12,7 @@ const Tags = (props) => {
     return Array.isArray(data) ? data : [];
   });
 
-  console.log("all tagsData data in tags.jsx file", tagsData);
+  // console.log("all tagsData data in tags.jsx file", tagsData); 
 
   // Filter tags based on input and exclude already selected tags and created tags
   const filteredTags = tagsData.filter(tag =>
@@ -22,7 +22,7 @@ const Tags = (props) => {
     !createdTags.some(createdTag => createdTag.tagTitle === tag.tagTitle)
   );
 
-  console.log("filtered tags", filteredTags);
+  // console.log("filtered tags", filteredTags);
 
   // Check if input matches any tag or created tag
   const exactInputMatch = tagsData.some(tag => tag.tagTitle && tag.tagTitle.toLowerCase() === input.toLowerCase()) ||

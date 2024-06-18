@@ -3,7 +3,7 @@ export const fetchAllUsers=()=>async(dispatch)=>{
     try {
         const {data}=await api.fetchAllUsers();//we will get all the users using api request and stored into data
         // console.log("fetchallusers",data);
-        dispatch({type:"FETCH_USERS",  payload:data });//storing data to REDUX
+        await dispatch({type:"FETCH_USERS",  payload:data });//storing data to REDUX
 
     } catch (error) {
         console.log(error);     
@@ -35,7 +35,7 @@ export const updateProfile = (id, updateData) => async (dispatch) => {
         const { data } = await api.updateProfile(id, updateData);
         // console.log("Data received after profile update:", data);
 
-        dispatch({ type: "UPDATE_CURRENT_USER", payload: data });
+        await dispatch({ type: "UPDATE_CURRENT_USER", payload: data });
     } catch (error) {
         console.log(error);
     }

@@ -7,8 +7,8 @@ const QuestionList = ({questionList}) => {
   return (
     <>
     {
-        questionList.map((question)=>{
-            return <Questions question={question} questionid={question.id}/>
+        questionList.map((question,idx)=>{
+            return <Questions key={idx} question={question} questionid={question.id}/>
         })
     }
     </>

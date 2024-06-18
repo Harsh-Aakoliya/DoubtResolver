@@ -46,67 +46,6 @@ const QuestionsDetails = () => {
     const questionsList=useSelector(state=>state.questionsReducer);
 
 
-    // const questionsList=[
-    //     {
-    //       _id:'1',
-    //       upVotes:3,
-    //       downVotes:2,
-    //       noOfAnswer:4,
-    //       questionTitle:"what is function",
-    //       questionBody: "It means to be",
-    //       questionTags:["java","c++","c"],
-    //       userPosted:"mano1",
-    //       userId:101,
-    //       askedOn:"jan 1",
-    //       answer:[{
-    //         answerBody: "Answer is somethid;akjsdf",
-    //         userAnswered:"Harsh1",
-    //         answeredOn:"jan 2",
-    //         userId:11
-    //       }]
-    //     },
-    //     {
-    //       _id:'2',
-    //       upVotes:3,
-    //       downVotes:90,
-    //       noOfAnswer:4,
-    //       questionTitle:"what is function",
-    //       questionBody: "It means to be",
-    //       questionTags:["java","c++","c"],
-    //       userPosted:"mano2",
-    //       userId:102,
-    //       askedOn:"jan 1",
-    //       answer:[{
-    //         answerBody: "Answer",
-    //         userAnswered:"Harsh2",
-    //         answeredOn:"jan 2",
-    //         userId:12
-    //       }]
-    //     },
-    //     {
-    //       _id:'3',
-    //       upVotes:3,
-    //       downVotes:2,
-    //       noOfAnswer:4,
-    //       questionTitle:"what is function",
-    //       questionBody: "It means to be",
-    //       questionTags:["java","c++","c"],
-    //       userPosted:"mano3",
-    //       userId:103,
-    //       askedOn:"jan 1",
-    //       answer:[{
-    //         answerBody: "Answer",
-    //         userAnswered:"Harsh3",
-    //         answeredOn:"jan 2",
-    //         userId:13
-    //       }]
-    //     }
-    //   ];
-
-
-
-    //this part is when we post our answer for given question  
-
     const [Answer,setAnswer]=useState("");
     const Navigate=useNavigate(); 
     const dispatch=useDispatch();

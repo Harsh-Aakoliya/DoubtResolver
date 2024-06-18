@@ -61,10 +61,10 @@ app.get("/tags/getAllTags",async (req,res)=> {
 
 app.post("/tags/addTags",async (req,res)=>{
   try{
-    console.log("got request to insert this tags",req.body);
+    // console.log("got request to insert this tags",req.body);
 
     const addTagsData=req.body;  //title,body and tags reterived from front end
-    console.log("at server side getting all the tags that needs to be added",addTagsData);
+    // console.log("at server side getting all the tags that needs to be added",addTagsData);
     const addTags=new Tags(addTagsData); //now creating new object with Schema as Questions (which we have imported from model) with data as postQuesitonData
     await addTags.save(); //saving to moongoDB
     res.status(200).json(`${addTagsData.tagTitle} added successfully`);

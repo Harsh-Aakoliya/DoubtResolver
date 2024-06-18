@@ -3,8 +3,8 @@ export const fetchAllTags=()=>async(dispatch)=>{
     try {
         console.log("Got request to fetchall the tags :")
         const {data}=await api.fetchAllTags();
-        console.log("data we got from backend for tags is ",data);
-        dispatch({type:"FETCH_TAGS",  payload:data });//storing data to REDUX
+        // console.log("data we got from backend for tags is ",data);
+        await dispatch({type:"FETCH_TAGS",  payload:data });//storing data to REDUX
     } catch (error) {
         console.log("got error for featching all the tags",error);     
     }
@@ -14,8 +14,8 @@ export const postNewTags=(newTagsToAdd)=>async(dispatch)=>{
     try {
         const {data}=await api.addNewTag(newTagsToAdd);
         console.log("after adding new tags to database in action file",data);
-        dispatch({type:"POST_TAGS",payload:data});
-        dispatch(fetchAllTags());
+        await dispatch({type:"POST_TAGS",payload:data});
+        await dispatch(fetchAllTags());
 
     } catch (error) {
         console.log("error get at action file of tags.js",error);
@@ -29,7 +29,7 @@ export const updateTags = (id, updateData) => async (dispatch) => {
         const { data } = await api.updateTags(id, updateData);
         console.log("Data received after updatating tags:", data);
 
-        dispatch({ type: "UPDATE_TAGS", payload: data });
+        await dispatch({ type: "UPDATE_TAGS", payload: data });
     } catch (error) {
         console.log(error);
     }
