@@ -50,6 +50,33 @@ const QuestionsDetails = () => {
     const Navigate=useNavigate(); 
     const dispatch=useDispatch();
     const User=useSelector((state)=> (state.currentUserReducer));//retriving User value from REDUX
+    const tagList=useSelector((state)=>(state.tagReducer.data));
+
+
+    console.log("all questions",questionsList);
+    console.log("all tags",tagList);
+
+        let fndqn=questionsList.data?.find( question=>question._id === id);//here questionList.data?.data is important because if you not do that and you reload then it will through an error that .find is not function on null
+        console.log("fnd ",fndqn);
+
+        const allTags=fndqn?.questionTags || [];
+        const allTagsDetails=[]
+        for(let tag of allTags){
+            let fndtg=tagList?.find((tagith)=>(tagith.tagTitle === tag))
+            // allTagsDetails.push({fnd._id,fnd.tagTitle});
+            console.log("tag found with tag as ",tag," is ",fndtg);
+            if(!fndtg){//here write a query for those quenstion for that not present in tags collection her i am simply making static entry for those => _id will be "" and tagTitle will be tag
+                allTagsDetails.push({
+                    _id:"",
+                    tagTitle:tag
+                });
+
+            }
+            else
+            allTagsDetails.push(fndtg);
+        }
+
+
     const handlePostAns=(e,answerLength)=>{
         e.preventDefault();
         if(User === null){
@@ -191,8 +218,8 @@ const QuestionsDetails = () => {
                                 <p>
                                     Browse Other Questions tagged
                                     {
-                                        question.questionTags.map((tag)=>(
-                                            <Link to='/Tags' ley={tag} className='ans-tags'> {tag} </Link>
+                                        allTagsDetails?.map((tag)=>(
+                                            <Link to={`/Tags/${tag._id}`} ley={tag.tagTitle} className='ans-tags'> {tag.tagTitle} </Link>
                                         ))
                                     }
                                     or

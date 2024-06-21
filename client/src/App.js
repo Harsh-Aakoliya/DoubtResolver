@@ -23,7 +23,7 @@ function App(){
     useEffect(() => {
         dispatch(fetchAllQuestions({message:"App.js"})) //get request to database
         dispatch(fetchAllUsers());
-        dispatch(fetchAllTags());
+        dispatch(fetchAllTags({message:"at app.js file"}));
     }, [dispatch]); //so in dependency array we have [dispatch] so when ever disptch will be used then it will call this fetchAllQuestions() 
 
 

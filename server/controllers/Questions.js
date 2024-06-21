@@ -35,7 +35,7 @@ export const AskQuestion = async (req, res) => {
         // Fetch the saved question from database to ensure you have the complete object with generated _id
         const savedQuestion = await Questions.findById(postQuestion._id);
         console.log("newly pushed question returnign to frontend",savedQuestion);
-        res.status(200).json({message:"Question posted successfylly"}); // return the saved question object
+        res.status(200).json(savedQuestion); // return the saved question object
     } catch (error) {
         console.log(error);
         res.status(409).json({ message: "Could not post new question", error: error.message });

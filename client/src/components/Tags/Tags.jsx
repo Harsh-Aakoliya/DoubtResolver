@@ -8,7 +8,7 @@ const Tags = (props) => {
   const [showAllTags, setShowAllTags] = useState(false);
 
   const tagsData = useSelector((state) => {
-    const data = state.tagReducer;
+    const data = state.tagReducer.data;
     return Array.isArray(data) ? data : [];
   });
 

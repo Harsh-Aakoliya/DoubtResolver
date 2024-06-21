@@ -4,7 +4,7 @@ import TagsList from './TagsList'
 import "./Tags.css"
 import { useSelector } from 'react-redux'
 const Tags = () => {
-    const tagsList=useSelector((state)=>state.tagReducer)
+    const tagsList=useSelector((state)=>state.tagReducer.data)
         console.log("All available tags are ",tagsList);
 
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -29,7 +29,7 @@ const Tags = () => {
             <p className='tags-p'>A tag is a keyword or label that categorizes your question with other, similar questions. Using the right tags makes it easier for others to find and answer your question.</p>
             <div className="tags-list-container">
                 {
-                    tagsList.map((tag)=>(
+                    tagsList?.map((tag)=>(
                         <TagsList tag={tag} key={tagsList.id}/>
                     ))
                 }

@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const tagSchema=mongoose.Schema({
     tagTitle: {type:String},
-    tagDescription: {type:String,default:"Newly added tag Description is under process"},
+    tagDescription: {type:String},
     createdOn:{type:Date , default:Date.now},
     allQuestions:{type:[String],default:[]}
 });
