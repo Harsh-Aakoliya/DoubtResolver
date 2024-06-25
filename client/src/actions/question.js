@@ -55,14 +55,23 @@ export const deleteQuestion = (id,navigate) => async(dispatch) => {
 export const voteQuestion =(id,value,userId)=>async(dispatch)=>{
     try {
         const { data }=await api.voteQuestion(id,value,userId);
-        await dispatch(fetchAllQuestions({message:"Vote question of action file"}));
+        dispatch(fetchAllQuestions({message:"Vote question of action file"}));
+        console.log("data atvoteQuestion action creator",data)
+        // return data;
     } catch (error) {
         console.log(error);
     }
 }
 
-
-
+export const bookmarkQuestion = (userId,questionId)=>async(dispatch)=>{
+    try {
+        const {data} = await api.bookmarkQuestion(userId,questionId);
+        console.log("data we got after bookmarking",data);
+        await dispatch({ type: "UPDATE_CURRENT_USER", payload: data });
+    } catch (error) {
+        
+    }
+}
 
 
 //................Actions related to answer

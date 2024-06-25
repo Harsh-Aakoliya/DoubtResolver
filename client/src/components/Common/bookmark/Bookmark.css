@@ -1,0 +1,17 @@
+.bookmark-container {
+  display: inline-block;
+}
+
+.bookmark {
+  width: 20px;
+  height: 30px;
+  border: 10px solid lightgrey;
+  position: relative;
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%);
+  background-color: transparent;
+}
+
+.bookmark.bookmarked {
+  background-color: black;
+  border-color: black;
+}

@@ -32,7 +32,7 @@ const Questions = ({question}) => {
                   }
                 </div>
                 <p className="display-time">
-                  asked {moment(question.askedOn).fromNow()} {question.userPosted}
+                  asked {moment(question.askedOn).fromNow()} By {question.userPosted}
                 </p>
              </div>
         </div>

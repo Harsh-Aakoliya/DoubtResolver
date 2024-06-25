@@ -50,7 +50,7 @@ app.use("/answer",answerRoutes);
 app.get("/tags/getAllTags",async (req,res)=> {
     try {
       const tagList=await Tags.find();//it will store all the questions from Question schema from database to questionList variable
-      console.log(tagList);
+      // console.log(tagList);
       res.status(200).json(tagList); //sending data to frontend
   } catch (error) {
       console.log("error printing in backend",error.message);
@@ -62,15 +62,15 @@ app.get("/tags/getAllTags",async (req,res)=> {
 
 app.post("/tags/addTags",async (req,res)=>{
   try{
-    console.log("got request to insert this tags",req.body);
+    // console.log("got request to insert this tags",req.body);
 
     const addTagsData=req.body;  //title,body and tags reterived from front end
-    console.log("at server side getting all the tags that needs to be added",addTagsData);
+    // console.log("at server side getting all the tags that needs to be added",addTagsData);
     const addTags=new Tags(addTagsData); //now creating new object with Schema as Questions (which we have imported from model) with data as postQuesitonData
     await addTags.save(); //saving to moongoDB
 
     const savedTag = await Tags.findById(addTags._id);
-    console.log("saved tag at backedn",savedTag)
+    // console.log("saved tag at backedn",savedTag)
     res.status(200).json(savedTag);
   }catch(error){
     console.log("getting some error while inserting new tags in to DB",error);
@@ -83,7 +83,7 @@ app.post("/tags/addTags",async (req,res)=>{
 app.patch("/tags/update/:id",async (req,res)=>{
   try {
         const {id:_id}=req.params;
-        console.log("got request to update tag ",req.body.tagTitle);
+        // console.log("got request to update tag ",req.body.tagTitle); 
         const tagToUpdate=req.body;
         const newQuestions = Array.isArray(req.body.allQuestions) ? req.body.allQuestions : [req.body.allQuestions];
 
@@ -128,8 +128,8 @@ app.post("/Forgotpassword",async (req,res)=>{
             from: 'harshaakoliya20@gmail.com',
             to: user.email,
             subject: 'Reset Password Link', 
-            // text: `http://localhost:3000/reset_password/${user._id}/${token}`
-            text: `https://doubt-resolver.netlify.app/reset_password/${user._id}/${token}`
+            text: `http://localhost:3000/reset_password/${user._id}/${token}`
+            // text: `https://doubt-resolver.netlify.app/reset_password/${user._id}/${token}`
           };
           
           transporter.sendMail(mailOptions, function(error, info){

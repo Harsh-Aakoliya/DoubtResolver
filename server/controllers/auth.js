@@ -5,22 +5,22 @@
 // 14) now we can user schema of user from models folder and another needed packages
 import jwt from "jsonwebtoken"
 import bcrypt from "bcryptjs"
-import users from "../models/auth.js"
+import User from "../models/auth.js"
 
 export const signup =async(req,res)=>{
     // 15) now we are getting request from "/user/signup" now to get field of username , email and password we need three variables
     const {name,email,password}=req.body;//after this we got name, email and password field from signin page
     try{
-        //here we are sending request to atlas for finding only one user using email using schema users which we have imported form models folder so we have to use below await function  
-        const existinguser=await users.findOne({email});
-        
+        //here we are sending request to atlas for finding only one user using email using schema User which we have imported form models folder so we have to use below await function  
+        const existinguser=await User.findOne({email});
+        console.log("existing user is",existinguser);
         if(existinguser){
             return res.status(404).json({message:"User already exist..."});//if user already exist then return message
         }
         
         //hashing the password
         const hashedPassword= await bcrypt.hash(password,12);//12 is salt value 
-        const newUser=await users.create({name,email,password:hashedPassword});//inserting newuser into users database of atlas and geting it into newUser variable
+        const newUser=await User.create({name,email,password:hashedPassword});//inserting newuser into User database of atlas and geting it into newUser variable
         const token=jwt.sign({email:newUser.email , id:newUser._id},process.env.JWT_SECRET,{expiresIn:"1h"})//generating token for authentication . here "test" is highly confidential things
         res.status(200).json({result:newUser,token});
         
@@ -36,7 +36,8 @@ export const login =async(req,res)=>{
     const {email,password}=req.body;//after this we got email and password field form login page
     try{
         //since we are logining so if we found that user then and only then we need to allow.
-        const existinguser=await users.findOne({email});
+        const existinguser=await User.findOne({email});
+        
         
         if(!existinguser){
             // console.log("user not found");

@@ -1,12 +1,12 @@
 /*This file is to display individual question with upvotes and downvotes and alreasy answered to that question and form for replay to question and all */
 
-import React from 'react'
+import React, { useDebugValue, useEffect } from 'react'
 
 import './Questions.css'
 
 
 /* to extract id from url */
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link, useNavigate, useResolvedPath } from 'react-router-dom';
 import upvotes from '../../assets/upvotes.png'
 import downvotes from '../../assets/downvotes.png'
 import Avatar from '../../components/Avatar/Avatar';
@@ -16,7 +16,7 @@ import { useSelector } from 'react-redux';
 //for posting answer for question
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { postAnswer } from '../../actions/question';
+import { bookmarkQuestion, postAnswer } from '../../actions/question';
 
 //this is for modification in time
 import moment from "moment"
@@ -31,6 +31,11 @@ import { deleteQuestion } from '../../actions/question';
 
 //for up and down votes
 import { voteQuestion } from '../../actions/question';
+import Vote from '../../components/Common/Vote';
+
+
+import Bookmark from '../../components/Common/bookmark/Bookmark';
+
 
 
 
@@ -44,12 +49,45 @@ const QuestionsDetails = () => {
 
     //instead of hard coding we have to fetch from redux store
     const questionsList=useSelector(state=>state.questionsReducer);
+    const allUsers=useSelector((state)=>(state.usersReducer));//retriving User value from REDUX
+    console.log("All users",allUsers);
+    const curUser=useSelector((state)=>(state.currentUserReducer));
+    console.log("curUser",curUser)
+    const User=allUsers?.find((user)=>(user._id === curUser?.result?._id));
+    console.log("Current user that have logged in ",User);
+    //code for upvoting and downvoting
+    const curQuestion=questionsList?.data?.find(question => question._id === id);
+    const curQuestionUpVoteList=curQuestion?.upVote;
+    const curQuestionDownVoteList=curQuestion?.downVote;
+    console.log("all upVotes that current question have",curQuestionUpVoteList)
+    console.log("all downVote that current question have",curQuestionDownVoteList)
+    console.log("current logged user id",User?._id);
+    //there are three cases 
+    //1) current user have upvoted
+    //2) current user have downvoted
+    //3) current user have not upvoted nor downvoted 
 
+    //1) type-> upVote isFilled=true and type->downVote isFilled=false
+    //2) type-> upVote isFilled=false and type->downVote isFilled=true
+    //3) type-> upVote isFilled=false and type->downVote isFilled=false
+    
+    const [haveUpVoted,setHaveUpVoted]=useState(false)
+    const [haveDownVoted,setHaveDownVoted]=useState(false)
 
+    //⚡below both line will cause infinite rendering
+    // setHaveUpVoted(curQuestionUpVoteList?.includes(User?.result?._id));
+    // setHaveDownVoted(curQuestionDownVoteList?.includes(User?.result?._id));
+    
+    useEffect(()=>{
+        setHaveUpVoted(curQuestionUpVoteList?.includes(User?._id));
+        setHaveDownVoted(curQuestionDownVoteList?.includes(User?._id));
+    },[curQuestionUpVoteList,curQuestionDownVoteList,User])
+
+    console.log("have upvoted",haveUpVoted,"have downvoted",haveDownVoted);
+    
     const [Answer,setAnswer]=useState("");
     const Navigate=useNavigate(); 
     const dispatch=useDispatch();
-    const User=useSelector((state)=> (state.currentUserReducer));//retriving User value from REDUX
     const tagList=useSelector((state)=>(state.tagReducer.data));
 
 
@@ -89,7 +127,7 @@ const QuestionsDetails = () => {
             }
             else{
                 //calling function of action folder of question.js of postAnser() to do specific action on submitting
-                dispatch(postAnswer({ id, noOfAnswers: answerLength + 1 , answerBody: Answer , userAnswered: User.result.name, userId: User.result._id}));
+                dispatch(postAnswer({ id, noOfAnswers: answerLength + 1 , answerBody: Answer , userAnswered: User.name, userId: User._id}));
             }
         } 
     }
@@ -101,8 +139,8 @@ const QuestionsDetails = () => {
 
     const location =useLocation();
     // console.log(location);//we can see in console like there is property as "pathname" which gives current url of page
-    const url="https://doubt-resolver.netlify.app";//base url for frontend deployment
-    // const url="http://localhost:3000";//base url without deploying
+    // const url="https://doubt-resolver.netlify.app";//base url for frontend deployment
+    const url="http://localhost:3000";//base url without deploying
     const handleShare = ()=>{
         copy(url+location.pathname);
         alert("Url copied : "+url+location.pathname);
@@ -117,24 +155,69 @@ const QuestionsDetails = () => {
 
 
     //this is for handling up and down votes
-
-    const handleUpVote =(e)=>{
+    const [upVoting,setUpVoting]=useState(false);
+    const [downVoting,setDownVoting]=useState(false);
+    const handleUpVote = (e) => {
         e.preventDefault();
-        if(User === null){
+        if (User === null) {
             alert("Login or sign Up to answer question");
             Navigate("/Auth");
+            return;
         }
-        else dispatch(voteQuestion(id,"upVote",User.result._id));
+        setUpVoting(true); // Set upvoting state to true immediately
+        dispatch(voteQuestion(id, "upVote", User._id))
+            .then(async () => {
+                setHaveUpVoted(!haveUpVoted); // Update upvoted state after successful vote
+                setUpVoting(false)
+            })
+            .catch((error) => {
+                console.error("Error while upvoting:", error);
+                setUpVoting(false); // Reset upvoting state on error
+            });
     }
-    const handleDownVote =(e)=>{
+    
+    const handleDownVote = (e) => {
         e.preventDefault();
-        if(User === null){
+        if (User === null) {
             alert("Login or sign Up to answer question");
             Navigate("/Auth");
+            return;
         }
-        else dispatch(voteQuestion(id,"downVote",User.result._id));
+        setDownVoting(true); // Set downvoting state to true immediately
+        dispatch(voteQuestion(id, "downVote", User._id))
+            .then(() => {
+                setHaveDownVoted(!haveDownVoted)
+                setDownVoting(false); // Reset downvoting state after vote is completed
+            })
+            .catch((error) => {
+                console.error("Error while downvoting:", error);
+                setDownVoting(false); // Reset downvoting state on error
+            });
     }
+    
+    const [isBookmarked,setIsBookmarked]=useState(false);
+    console.log("all bookmarked by this user",User);
 
+    useEffect(()=>{
+        setIsBookmarked(User?.savedQuestions?.includes(id));    
+        console.log("in userEffect",User);
+    },[User,id]);
+    console.log("here in question details file",isBookmarked)
+    const handleSaveQuestion=(e)=>{
+        e.preventDefault();
+        if(User === null){
+            alert("Login or Sign Up to bookmark");
+            Navigate("/Auth");
+            return;
+        }
+        const userId=User?._id;
+        const questionId=id;
+        console.log("data send to backend",userId,questionId);
+        dispatch(bookmarkQuestion(userId,questionId))
+        setIsBookmarked(!isBookmarked);
+        
+    }
+    
 
   return (
     <div className='question-details-page'>
@@ -150,10 +233,26 @@ const QuestionsDetails = () => {
                                 <h1>{question.questionTitle}</h1>
                                 <div className="question-details-container-2">
                                     <div className="question-votes">
-                                        <img src={upvotes} alt='upvotes' width='18' className='votes-icon' onClick={handleUpVote}/>
-                                        <p>{question.upVote.length - question.downVote.length}</p>
-                                        <img src={downvotes} alt='downvotes' width='18' className='votes-icon' onClick={handleDownVote}/>
+                                        <div className="vote-container" onClick={handleUpVote}>
+                                            <Vote type="upVote" isFilled={haveUpVoted} />
+                                        </div>
+                                        <div className="vote-count">
+                                            {upVoting ? <p className="voting-status">Upvoting...</p> :
+                                                downVoting ? <p className="voting-status">Downvoting...</p> :
+                                                <p className="vote-number">{question?.upVote.length - question?.downVote.length}</p>
+                                            }
+                                        </div>
+                                        <div className="vote-container" onClick={handleDownVote}>
+                                            <Vote type="downVote" isFilled={haveDownVoted} />
+                                        </div>
+                                        <div className="bookmark-container">
+                                        <p className="bookmark-text">Bookmark</p>
+                                        <div className="bookmark-icon" onClick={handleSaveQuestion}>
+                                            <Bookmark isBookmarked={isBookmarked}/>                     
+                                        </div>
                                     </div>
+                                </div>
+
 
                                     <div style={{width:"100%"}} >
                                         <p className='question-body'>{question.questionBody}</p>
@@ -166,12 +265,11 @@ const QuestionsDetails = () => {
                                         </div>
                                             <div className="question-actions-user">
                                                 <div>
-                                                    <button type='button' onClick={handleShare}>Share</button>
+                                                    <button type='button' onClick={handleShare} >Share</button>
                                                     {/* to delete question first we need to display delete button so if userposted matches with user who have login then we can show delete button and we can delete question  */}
                                                     {( (User?.result?._id) === (question?.userId ))  && (<button type='button' onClick={handleDelete}>Delete</button>)}
-                                                    {/* <h6>{User?.result?._id}</h6>
-                                                    <br />
-                                                    <h6>{question?.userId}</h6> */}
+                                                    
+
                                                 </div>
                                                 <div>
                                                     <p>AskedOn {moment(question.askedOn).fromNow()}</p>
@@ -237,3 +335,5 @@ const QuestionsDetails = () => {
 }
 
 export default QuestionsDetails;
+
+

@@ -33,13 +33,13 @@ const UserProfile = () => {
   // console.log("all the users",users);
   //now we are extracting id of that user on whose profile currently we at
   const {id}=useParams();
-  // console.log(id);
+  console.log("id in UserProfile page",id);
   const  currentProfile=users.filter((user) => user._id === id)[0];
-  // console.log("currentprofile",currentProfile);
+  console.log("currentprofile",currentProfile);
 
   //now we need to diffrentiate current user who have currently logged in and that user whose profile we are currently viewing
   const currentUser= useSelector((state) => state.currentUserReducer);
-  // console.log("currentUser",currentUser);
+  console.log("currentUser",currentUser);
 
   const [Switch, setSwitch] =useState(false);
 
@@ -58,6 +58,9 @@ const UserProfile = () => {
   }, []);
 
   return (
+    
+    !currentProfile ?<h1 style={{marginTop:"100px"}}>User profile not exist</h1>
+:
     <div className='home-container-1'>
        { windowWidth>=700 && <LeftSidebar/>}
           <div className="home-container-2">
@@ -92,7 +95,7 @@ const UserProfile = () => {
                         Switch ?(
                           <EditProfileForm currentUser={currentUser} setSwitch={setSwitch}/>
                         ):(
-                          <ProfileBio currentProfile={currentProfile}/>
+                          <ProfileBio currentProfile={currentProfile} currentUser={currentUser}/>
                         )
                       }
                   </>

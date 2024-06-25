@@ -8,6 +8,8 @@ import {deleteQuestion} from "../controllers/Questions.js";
 import { voteQuestion } from "../controllers/Questions.js";
 
 
+import { bookmarkQuestion } from "../controllers/Questions.js";
+
 //for middleware folder
 import auth from "../middlewares/auth.js"
 //now here for post,delete and patch request we need to use auth.js middleware but for get request which is nothing but to see question we don't need it because without login we can see the question
@@ -20,5 +22,6 @@ router.post("/Ask",auth,AskQuestion);//1)we are sending data to database using t
 router.get("/get",getAllQuestions); //we are retriving all the existing question from datebase to display to frontend
 router.delete("/delete/:id",auth,deleteQuestion)//we are requesting using delete request and along with url we are passing id of particular question that we wants to delete using deleteQuestion function which is there in controllers folder Questions.js file
 router.patch("/vote/:id",auth,voteQuestion)
+router.patch("/bookmark",auth,bookmarkQuestion);
 
 export default router;

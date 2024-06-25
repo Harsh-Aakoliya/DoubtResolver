@@ -1,7 +1,6 @@
 /* General container styles */
-.tag-profile-container {
+.profile-bio-container {
     margin: 20px;
-    margin-top: 100px;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -9,14 +8,14 @@
   }
   
   /* Header styles */
-.tag-profile-header {
+  .profile-bio-header {
     display: flex;
     justify-content: left;
     margin-bottom: 20px;
     gap: 10px;
-}
+  }
   
-.tag-profile-header button {
+  .profile-bio-header button {
     background-color: hsl(210, 8%, 80%);
     color: black;
     border: none;
@@ -25,48 +24,29 @@
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s;
-}
+  }
   
-.tag-profile-header button:hover {
+  .profile-bio-header button:hover {
     background-color: hsl(208, 10%, 68%);
-}
+  }
   
-.tag-profile-header button.active {
+  .profile-bio-header button.active {
     background-color: hsl(208, 10%, 50%);
     color: white;
     pointer-events: none;
-}
+  }
+  
+  .profile-bio-header button:disabled {
+    background-color: hsl(210, 8%, 90%);
+    color: #aaa;
+    cursor: not-allowed;
+  }
   
   /* Section styles */
-.tag-profile-content {
+  .profile-bio-content {
     padding: 20px;
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-  
-  /* Tag profile specific styles */
-.tag-profile-container h2 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #333;
-}
-  
-.tag-profile-container p {
-    margin: 10px 0;
-    font-size: 18px;
-    color: #555;
-}
-  
-.loading-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-  
-.loading-container h4 {
-    font-size: 24px;
-    color: #999;
-}   
+  }
   

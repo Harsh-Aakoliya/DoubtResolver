@@ -20,6 +20,8 @@ const usersReducer = (state = [], action) => {
       case "FETCH_USERS":
         return action.payload;
       case "UPDATE_CURRENT_USER":
+        console.log("all data at reducer",state);
+        console.log("payload",action.payload);
         return state.map((user) => (user._id === action.payload._id) ? { ...user, ...action.payload } : user);
       default:
         return state;

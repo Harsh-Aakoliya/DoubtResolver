@@ -23,9 +23,11 @@ cloudinary.config({
 export const getAllUsers=async(req,res)=>{
     try {
         const allUsers=await User.find();//we have retrived all the existing Users
+        console.log(allUsers);
         const allUserDetails=[];
         allUsers.forEach(users => {
-            allUserDetails.push({ _id:users._id , name:users.name ,email:users.email, about:users.about , tags:users.tags , joinedOn:users.joinedOn,profilePhoto:users.profilePhoto})
+            allUserDetails.push(users);
+            // allUserDetails.push({ _id:users._id , name:users.name ,email:users.email, about:users.about , tags:users.tags , joinedOn:users.joinedOn,profilePhoto:users.profilePhoto})
         });
         res.status(200).json(allUserDetails);//returning array to frontend
     } catch (error) {

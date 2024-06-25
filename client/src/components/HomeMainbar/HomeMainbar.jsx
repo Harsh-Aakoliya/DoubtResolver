@@ -1,113 +1,135 @@
-import React from 'react'
-import './HomeMainbar.css'
-import {Link,useLocation,useNavigate} from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import './HomeMainbar.css';
+import { useLocation, useNavigate } from 'react-router-dom';
 import QuestionList from './QuestionList';
-
-//for retriving data from redux store
 import { useSelector } from 'react-redux';
+
 const HomeMainbar = () => {
-  
+  const location = useLocation();
 
-
-  /* for checking user is loged in or not. if not then if user click on askquestion button then he/she must navigate to /Auth page else he/she will navigate to 'AskQuestion' page */
-    const user=useSelector((state)=>(state.currentUserReducer));
-    const navigate=useNavigate();
-    const checkAuth=()=>{
-      if(user===null){
-        alert("login or signup first to ask question!!");
-         navigate('/Auth');  
-      }
-      else{
-        navigate('/AskQuestion');
-      }
-      
+  const user = useSelector((state) => state.currentUserReducer);
+  const navigate = useNavigate();
+  const checkAuth = () => {
+    if (user === null) {
+      alert('Login or signup first to ask question!!');
+      navigate('/Auth');
+    } else {
+      navigate('/AskQuestion');
     }
-    //now insted of writing below hard code questionsList array we will retrive existing questionlist from redux store using useSelctor hook
-    const questionsList=useSelector(state=>state.questionsReducer);
-    // console.log(questionsList);
+  };
 
-//   const questionsList=[
-//   {
-//     _id:1,
-//     upVotes:3,
-//     downVotes:2,
-//     noOfAnswer:4,
-//     questionTitle:"what is function",
-//     questionBody: "It means to be",
-//     questionTags:["java","c++","c"],
-//     userPosted:"mano",
-//     userId:1,
-//     askedOn:"jan 1",
-//     answer:[{
-//       answerBody: "Answer",
-//       userAnswered:"Harsh1",
-//       answeredOn:"jan 2",
-//       userId:11
-//     }]
-//   },
-//   {
-//     _id:2,
-//     upVotes:3,
-//     downVotes:90,
-//     noOfAnswer:4,
-//     questionTitle:"what is function",
-//     questionBody: "It means to be",
-//     questionTags:["java","c++","c"],
-//     userPosted:"mano",
-//     userId:1,
-//     askedOn:"jan 1",
-//     answer:[{
-//       answerBody: "Answer",
-//       userAnswered:"Harsh1",
-//       answeredOn:"jan 2",
-//       userId:11
-//     }]
-//   },
-//   {
-//     _id:3,
-//     upVotes:3,
-//     downVotes:2,
-//     noOfAnswer:4,
-//     questionTitle:"what is function",
-//     questionBody: "It means to be",
-//     questionTags:["java","c++","c"],
-//     userPosted:"mano",
-//     userId:1,
-//     askedOn:"jan 1",
-//     answer:[{
-//       answerBody: "Answer",
-//       userAnswered:"Harsh1",
-//       answeredOn:"jan 2",
-//       userId:11
-//     }]
-//   }
-// ];
+  const questionsList = useSelector((state) => state.questionsReducer.data);
+  const tagList = useSelector((state) => state.tagReducer.data);
+  const allTagTitle = tagList?.map((tagObj) => tagObj.tagTitle);
+  console.log('All tags at homemainbar', allTagTitle);
 
-/* here below location is an object which has one property as pathname */
-const location=useLocation();
+  const [showAllTags, setShowAllTags] = useState(false);
+  const [input, setInput] = useState('');
+  const [selectedTags, setSelectedTags] = useState([]);
+  const filteredTags = allTagTitle?.filter(
+    (tag) => tag && tag.toLowerCase().includes(input.toLowerCase()) && !selectedTags.includes(tag)
+  );
+  console.log('Filtered tags', filteredTags);
+  console.log('Selected tags', selectedTags);
+
+  const handleFocus = () => {
+    console.log('Focused');
+    setShowAllTags(true);
+  };
+  const handleBlur = () => {
+    console.log('Blurred');
+    setTimeout(() => {
+      setShowAllTags(false);
+    }, 200);
+  };
+  const handleTagRemove = (tagTitle) => {
+    setSelectedTags(selectedTags.filter((title) => title !== tagTitle));
+  };
+
+  const handleTagClick = (tagTitle) => {
+    setSelectedTags([...selectedTags, tagTitle]);
+    setInput(''); // Clear input after selection
+    setShowAllTags(false); // Hide all tags after selection
+  };
+
+  let [questionListToDisplay, setQuestionListToDisplay] = useState([]);
+
+  useEffect(() => {
+    setQuestionListToDisplay(questionsList);
+  }, [questionsList]);
+
+  useEffect(() => {
+    if (selectedTags.length > 0) {
+      const filteredQuestions = questionsList?.filter((question) =>
+        selectedTags.some((tag) => question.questionTags.includes(tag))
+      );
+      setQuestionListToDisplay(filteredQuestions);
+    } else {
+      setQuestionListToDisplay(questionsList);
+    }
+  }, [selectedTags, questionsList]);
+
+  console.log('Question list to display', questionListToDisplay);
+
   return (
     <div className='main-bar'>
       <div className='main-bar-header'>
-        {
-          location.pathname==='/' ? <h1> Top Questions </h1> : <h1>All Questions</h1>
-        }
-        <button onClick={checkAuth} className='ask-btn'> Ask Question </button>
+        {location.pathname === '/' ? <h1>Top Questions</h1> : <h1>All Questions</h1>}
+        <button onClick={checkAuth} className='ask-btn'>Ask Question</button>
       </div>
       <div>
-        {
-          /* At the time of featching data from backend it may take time to load question to questionList so at that time questionList will be empty so we need to display Loading... */
-          questionsList.data===null ?
-          <h1>Loading....</h1> :
+        {questionsList === null ? (
+          <h1>Loading....</h1>
+        ) : (
           <>
-            <p>{questionsList.data.length} Questions </p>
+            <p>{questionListToDisplay?.length} Questions</p>
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              placeholder="Search tags..."
+              className="tag-input"
+            />
+
+            {showAllTags && (
               <>
-                <QuestionList questionList={questionsList.data} />
+                <p>showall tags {filteredTags.length}</p>
+                <div className="suggestions">
+                  {filteredTags?.length > 0 ? (
+                    filteredTags?.map((tag, index) => (
+                      <div key={index} onMouseDown={() => handleTagClick(tag)} className="suggestion-item">
+                        {tag}
+                      </div>
+                    ))
+                  ) : (
+                    <></>
+                  )}
+                </div>
               </>
+            )}
+
+            <h3>Selected Tags:</h3>
+            <ul className="selected-tags">
+              {selectedTags.map((tagTitle, index) => (
+                <li key={index} className="selected-tag">
+                  {tagTitle}
+                  <span onClick={() => handleTagRemove(tagTitle)} className="remove-tag">&times;</span>
+                </li>
+              ))}
+            </ul>
+            {
+              
+            }
+            <>
+              <QuestionList questionList={questionListToDisplay || []} />
+            </>
           </>
-        }
+        )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default HomeMainbar
+export default HomeMainbar;

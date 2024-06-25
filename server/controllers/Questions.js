@@ -1,5 +1,6 @@
 
 import Questions from "../models/Questions.js"
+import User from "../models/auth.js"
 import mongoose from "mongoose"
 
 
@@ -49,7 +50,7 @@ export const getAllQuestions=async (req,res)=>{
 
     try {
         const questionList=await Questions.find();//it will store all the questions from Question schema from database to questionList variable
-        console.log("sending data to frontend");
+        // console.log("sending data to frontend");
         res.status(200).json(questionList); //sending data to frontend
     } catch (error) {
         res.status(404).json({message : error.message});
@@ -133,4 +134,40 @@ export const voteQuestion=async(req,res)=>{
     } catch (error) {
         res.status(404).json({message: "Id not found"});
     }
+}
+
+
+
+export const bookmarkQuestion=async(req,res)=>{
+    const data=req.body;
+    const userId=data.userId;
+    const questionId=data.questionId;
+    console.log("userID ",userId,"and queuestionID",questionId);
+    console.log(data);
+    
+    try {
+        const user=await User.findById(userId);
+        console.log("found user is ",user);
+        if(!user){
+            return res.status(404).send("User not found ");
+        }
+        const allBookMarks=user.savedQuestions;
+        console.log("all bookmarks before updation",allBookMarks);
+        if(allBookMarks.includes(questionId)){
+            allBookMarks.remove(questionId);
+        }
+        else{
+            allBookMarks.push(questionId);
+        }
+        console.log("queston that need to put in DB",allBookMarks);
+        const updatedProfile=await User.findByIdAndUpdate(userId, {...user,savedQuestions:allBookMarks},{new:true});
+        console.log("Updated profile",updatedProfile);
+        res.status(200).json(updatedProfile);
+        
+    } catch (error) {
+        res.status(404).json({message: "failed to bookmark"});
+    }
+
+    // res.status(200).json({message:"Updated successfully"});
+
 }

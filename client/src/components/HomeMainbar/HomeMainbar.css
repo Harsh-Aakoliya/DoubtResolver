@@ -104,3 +104,90 @@
         /* text-align: center; Center its contents */
     }
 }
+
+
+
+.tags-container {
+    display: flex;
+    justify-content: space-around;
+    /* flex-direction: column; */
+    width: 100%;
+    position: relative;
+    margin: 0 auto;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.tag-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 8px;
+    box-sizing: border-box;
+}
+
+.create-tag-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    margin-top: 8px;
+    /* display: none; Hide by default, show only when needed */
+}
+
+.create-tag-button:hover {
+    background-color: #0056b3;
+}
+
+.suggestions {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    /* position: absolute; */
+    /* width: 100%; */
+    max-height: 150px;
+    overflow-y: auto;
+    z-index: 10;
+    top: 100%; /* Position below input */
+    left: 0;
+    margin-top: 8px; /* Space between input and suggestions */
+}
+
+.suggestion-item {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.suggestion-item:hover {
+    background-color: #f0f0f0;
+}
+
+.selected-tags, .created-tags {
+    list-style-type: none;
+    padding: 0;
+}
+
+.selected-tag {
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    margin: 4px 0;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+}
+
+.remove-tag {
+    margin-left: auto;
+    cursor: pointer;
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.error-message {
+    color: red;
+    margin-top: 8px;
+}
