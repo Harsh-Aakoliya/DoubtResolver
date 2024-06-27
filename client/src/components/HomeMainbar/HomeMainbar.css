@@ -97,12 +97,6 @@
     font-size: 13px;                
 }
 
-@media (max-width: 800px) {
-    .main-bar {
-        width: 100%; /* Make home container 2 fill the entire width */
-        float: none; /* Remove any float */
-    }
-}
 
 
 
@@ -189,4 +183,18 @@
 .error-message {
     color: red;
     margin-top: 8px;
+}
+
+
+
+@media (max-width: 800px) {
+    .main-bar {
+        width: 100%; /* Make home container 2 fill the entire width */
+        float: none; /* Remove any float */
+    }
+}
+@media (max-width: 320px) {
+    .home-container-2 {
+        width: auto;
+    }
 }
