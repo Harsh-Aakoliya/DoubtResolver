@@ -14,10 +14,29 @@
     box-sizing: border-box;
 }
 
-@media (max-width:320px){
+@media (max-width:425px){
+    .home-container-2{
+        box-sizing: content-box;
+        width: auto;    
+    }
 }
-@media (max-width:376px){
+
+
+@media screen and (max-width: 768px) {
+    .home-container-2 {
+        width: 100%; /* Make home container 2 fill the entire width */
+        float: none; /* Remove any float */
+        /* text-align: center; Center its contents */
+    }
+}
+@media (max-width: 320px) {
+    .home-container-2 {
+        width: auto;
+    }
+}
+
+/* @media (max-width:376px){
     .home-container-2{
         box-sizing: content-box;
     }
-}
+} */

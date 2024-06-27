@@ -67,7 +67,7 @@
     text-decoration: none;
     color: #037ecb;
     transition: 0.3s;
-
+    word-break: break-all;
 }
 .question-title-link:hover{
     color: #009dff;
@@ -182,8 +182,12 @@
 
 .error-message {
     color: red;
-    margin-top: 8px;
+    margin-top:1px 8px;
 }
+
+/* *{
+    outline: 1px solid;
+} */
 
 
 
@@ -191,10 +195,5 @@
     .main-bar {
         width: 100%; /* Make home container 2 fill the entire width */
         float: none; /* Remove any float */
-    }
-}
-@media (max-width: 320px) {
-    .home-container-2 {
-        width: auto;
     }
 }

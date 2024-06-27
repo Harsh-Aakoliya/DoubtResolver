@@ -25,7 +25,6 @@ const Navbar = () => {
     const User = useSelector((state) => (state.currentUserReducer)); 
 
     const dispatch = useDispatch();
-    
     const navigate = useNavigate();
     const handleLogout = () => {
         dispatch({ type: "LOGOUT" }); 
@@ -134,7 +133,7 @@ const Navbar = () => {
                             </div>                      
                             {
                                 User === null ? 
-                                <Link to='/Auth' className='nav-item nav-links'>Log In</Link> :
+                                <Link to='/Auth' className='nav-item nav-links LogIn'>Log In</Link> :
                                 <>
                                     <Link to={`Users/${User?.result?._id}`} >
                                         <Image
@@ -148,7 +147,7 @@ const Navbar = () => {
                                             }}
                                         />
                                     </Link>
-                                    <button className='nav-item nav-links' onClick={handleLogout}>Log Out</button>
+                                    <button className={`nav-item nav-links LogOut`} onClick={handleLogout}>Log Out</button>
                                 </>
                             }
                         </div>

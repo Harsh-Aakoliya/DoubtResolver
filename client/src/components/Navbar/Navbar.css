@@ -158,17 +158,22 @@
     }
 }
 
-/* @media (max-width: 375px) {
-    .main-nav {
-        max-width: 350px;
+@media (max-width: 376px) {
+    .right-section{
+        gap: 2px;
+        
     }
-} */
+    .LogOut{
+        padding: 10px 5px;
+    }
+}
 
-/* @media (max-width: 320px) {
-    .main-nav {
-        max-width: 300px;
-    }
+
+@media (max-width: 320px) {
     .nav-item {
-        font-size: 14px;
+        padding: 5px 5px;
     }
-} */
+    .right-section{
+        margin-right: 10px;
+    }
+}

@@ -50,11 +50,3 @@
     border-right: solid 3px #ef8236;
 }
 
-
-@media screen and (max-width: 768px) {
-    .home-container-2 {
-        width: 100%; /* Make home container 2 fill the entire width */
-        float: none; /* Remove any float */
-        /* text-align: center; Center its contents */
-    }
-}
