@@ -10,14 +10,17 @@ const ProfileBio = ({ currentProfile, currentUser }) => {
   const [havetoShow, setHaveToShow] = useState(false);
 
   const questionsList = useSelector((state) => state.questionsReducer.data);
+  const allUsers=useSelector(state=>state.usersReducer);
+
+  const currentLoggedUser=allUsers?.find((user)=>user?._id === currentUser?.result?._id);
 
   useEffect(() => {
-    if (currentProfile?._id === currentUser?.result?._id) {
+    if (currentProfile?._id === currentLoggedUser?._id) {
       setHaveToShow(true);
     } else {
       setHaveToShow(false); // Reset when condition is not met
     }
-  }, [currentProfile, currentUser]);
+  }, [currentProfile, currentLoggedUser]);
 
   const postedQuestions = questionsList?.filter(
     (question) => question.userId === currentProfile?._id
@@ -53,7 +56,7 @@ const ProfileBio = ({ currentProfile, currentUser }) => {
         {activeSection === 'profile' && <Profile />}
         {activeSection === 'postedQuestions' && <PostedQuestions postedQuestions={postedQuestions} />}
         {activeSection === 'savedQuestions' && havetoShow && (
-          <SavedQuestions savedQuestions={currentUser?.result?.savedQuestions} />
+          <SavedQuestions savedQuestions={currentLoggedUser?.savedQuestions} />
         )}
       </div>
     </div>

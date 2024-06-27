@@ -1,39 +1,81 @@
-.main-nav{
-    min-height: 50px;
-    width: 100%;
-    margin: 0% auto ;
+.outer {
     border-top: solid 3px #ef8236;
     box-shadow: 0px 1px 5px #00000033;
+    width: 100%;
     position: fixed;
     z-index: 5;
     top: 0%;
-    left: 0%;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: #f8f9f9;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;   
 }
 
-.navbar{
-    height: 100%;
-    min-width: 85%;
+.main-nav {
+    height: 50px;
+    max-width: 1250px;
+    width: 99%;
     display: flex;
     align-items: center;
+    margin: 0% auto;
+    gap: 10px;
+}
+
+.toggle-section {
+    padding-left: 24px;
+    display: none;
+}
+
+.navbar {
+    height: 100%;
+    min-width: 100%;
+    display: flex;
     justify-content: space-between;
 }
 
 
-/* .nav-logo{ */
-    /* padding: 5px 25px; */
-/* } */
+.left-section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.right-section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+
+.search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+.search input{
+    margin: 0;
+    padding: 8px 10px 8px 10px;
+    font-size: 13px;
+    border: solid 1px #0000003e;
+    border-radius: 3px;
+}
+
 .nav-item{
-    /* margin: 0px 3px; */
     font-size: small;
     font-weight: 500;
     text-decoration: none;
     color: rgb(69,69,69);
     transition: 0.2s;
+}
+
+
+.nav-links{
+    padding: 7px 13px;
+    border: solid 1px blue;
+    border-radius: 3px;
+    background-color: #e7f8fe;
+    cursor: pointer;
 }
 
 .nav-item:hover{
@@ -47,74 +89,38 @@
 }
 
 
-.navbar form{
-    flex-grow: 1;/*means it will occupy all remaining space so if we shrink page searchbar will change it's size accordingly*/
-    padding: 0px 12px ;
-    position: relative ;
 
+
+@media (max-width: 1024px) {
+    .main-nav {
+        max-width: 960px;
+    }
+    .navbar {
+        justify-content: space-between;
+    }
 }
 
-
-
-/* for search box in navbar  */
-.navbar form input{
-    min-width: 90%;
-    margin: 0;
-    padding: 8px 10px 8px 32px;
-    font-size: 13px;
-    border: solid 1px #0000003e;
-    border-radius: 3px;
-}
-
-.navbar form .search-icon{
-    position: absolute;
-    left:25px;
-    top:5px;
-}
-
-
-/* for Log In button  */
-.nav-links{
-    padding: 7px 13px;
-    border: solid 1px blue;
-    border-radius: 3px;
-    background-color: #e7f8fe;
-    cursor: pointer;
-}
-
-.nav-links:hover{
-    background-color: #d3e4eb ;
-}
-
-
-
-.toggle-button {
-    /* margin: 50px 0px; */
-    padding: 5px ;
-    border-radius: none;
-    /* background-color: #009dff;
-    border: solid 1px #009dff; */
-    /* border-radius: 0px; */
-    /* cursor: pointer;
-    transition: 0.3s;
-    color: white; */
-}
-.temp{
-    display: none;
-}
-@media only screen and (max-width: 700px) {
-    .temp{
-        display: block;
+@media (max-width: 768px) {
+    .main-nav{
+        padding: 0px 1px;
+    }
+    .navbar{
+        min-width: 90%;
+    }
+    .toggle-section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0px;
     }
     .toggle-button {
         display: block;
     }
-    .left-sidebar-div-collapse{
+    .left-sidebar-div-collapse {
         display: none;
     }
-    .left-sidebar-div-expand{
+    .left-sidebar-div-expand {
         border-radius: 10px;
-        /* border: solid black 1px; */
         display: block;
         position: absolute;
         top: 100%;
@@ -124,3 +130,45 @@
         box-shadow: 0px 2px 5px #00000033;
     }
 }
+
+@media (max-width:695px){
+    .nav-item{
+        padding: 10px
+    }
+    .nav-logo{
+        width: 45px;
+        height: 45px;
+        padding: 0px;
+    }
+}
+
+@media (max-width: 426px) {
+    .nav-logo{
+        width: 40px;
+        height: 40px;
+    }
+    .search{
+        display: none;
+    }
+    .navbar{
+        min-width: 88%;
+    }
+    .main-nav{
+        gap: 0px;
+    }
+}
+
+/* @media (max-width: 375px) {
+    .main-nav {
+        max-width: 350px;
+    }
+} */
+
+/* @media (max-width: 320px) {
+    .main-nav {
+        max-width: 300px;
+    }
+    .nav-item {
+        font-size: 14px;
+    }
+} */

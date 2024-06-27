@@ -21,7 +21,7 @@ const Home = () => {
 
   return (
     <div className='home-container-1'>
-      { windowWidth>=700 && <LeftSidebar/>}
+      { windowWidth>768 && <LeftSidebar/>}
       
       <div className='home-container-2'>
         <HomeMainbar/>

@@ -1,0 +1,53 @@
+
+
+
+
+
+
+
+
+
+
+
+.navbar form{
+    
+}
+
+
+
+/* for search box in navbar  */
+.navbar form input{
+    min-width: 90%;
+    
+}
+
+.navbar form .search-icon{
+    position: absolute;
+    left:25px;
+    top:5px;
+}
+
+
+/* for Log In button  */
+
+
+.nav-links:hover{
+    background-color: #d3e4eb ;
+}
+
+
+
+.toggle-button {
+    /* margin: 50px 0px; */
+    padding: 5px ;
+    border-radius: none;
+    /* background-color: #009dff;
+    border: solid 1px #009dff; */
+    /* border-radius: 0px; */
+    /* cursor: pointer;
+    transition: 0.3s;
+    color: white; */
+}
+.temp{
+    display: none;
+}

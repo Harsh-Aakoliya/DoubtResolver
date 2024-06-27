@@ -62,7 +62,7 @@ const UserProfile = () => {
     !currentProfile ?<h1 style={{marginTop:"100px"}}>User profile not exist</h1>
 :
     <div className='home-container-1'>
-       { windowWidth>=700 && <LeftSidebar/>}
+       { windowWidth>768 && <LeftSidebar/>}
           <div className="home-container-2">
               <section>
                   <div className="user-details-container">

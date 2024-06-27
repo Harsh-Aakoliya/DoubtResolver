@@ -99,55 +99,60 @@ const Navbar = () => {
     }, []);
 
     return (
-        <div ref={containerRef}>
+        <div ref={containerRef} className='outer'>
             <nav className='main-nav'>
-                <div className='temp'>
-                    <button
-                        className="toggle-button"
-                        onClick={handleClick}
-                    >
-                        <Hamburger clicked={clicked} />
-                    </button>
-                    <div 
-                        className={clicked ? 'left-sidebar-div-expand' : 'left-sidebar-div-collapse'}
-                    >
-                        <LeftSidebar windowWidth={windowWidth} clicked={clicked} setClicked={setClicked}/>
+                    <div className='toggle-section'>
+                        <button
+                            className="toggle-button"
+                            onClick={handleClick}
+                        >
+                            <Hamburger clicked={clicked} />
+                        </button>
+                        <div 
+                            className={clicked ? 'left-sidebar-div-expand' : 'left-sidebar-div-collapse'}>
+                            <LeftSidebar />
+                        </div>
                     </div>
-                </div>
-                <div className='navbar'>
-                    <Link to='/' className='nav-item nav-logo'>
-                        {windowWidth < 700 ? 
-                            <img src={mini_logo} style={{ height: "50px", width: "50px" }} /> : 
-                            <img src={logo} alt="Logo" />
-                        }
-                    </Link>
-                    <Link to='/' className='nav-item nav-btn'>About</Link>
-                    <Link to='/' className='nav-item nav-btn'>Product</Link>
-                    <Link to='/' className='nav-item nav-btn'>For Team</Link>
-                    <form>
-                        <input type='text' placeholder="search..." />
-                        <img src={search} alt='search' className='search-icon' />
-                    </form>
-
-                    {User === null ? 
-                        <Link to='/Auth' className='nav-item nav-links'>Log In</Link> :
-                        <>
-                            <Link to={`Users/${User?.result?._id}`} >
-                                <Image
-                                    width="30px"
-                                    height="30px"
-                                    src={User?.result?.profilePhoto}
-                                    alt="Image of profile"
-                                    style={{
-                                        marginRight: "10px",
-                                        borderRadius: "5px",
-                                    }}
-                                />
+                    <div className='navbar'>
+                        <div className='left-section'>
+                            <Link to='/' className='nav-item nav-logo'>
+                                {windowWidth <= 768 ? 
+                                    <img src={mini_logo} style={{ height: "50px", width: "50px" }} /> : 
+                                    <img src={logo} alt="Logo" />
+                                }
                             </Link>
-                            <button className='nav-item nav-links' onClick={handleLogout}>Log Out</button>
-                        </>
-                    }
-                </div>
+                            <Link to='/' className='nav-item nav-btn'>About</Link>
+                            <Link to='/' className='nav-item nav-btn'>Product</Link>
+                            <Link to='/' className='nav-item nav-btn'>For Team</Link>
+                        </div>
+
+                        <div className='right-section'>  
+                            <div className='search'>
+                                <img src={search} alt='search' className='search-icon' />
+                                <input type='text' placeholder="search..." />
+                                
+                            </div>                      
+                            {
+                                User === null ? 
+                                <Link to='/Auth' className='nav-item nav-links'>Log In</Link> :
+                                <>
+                                    <Link to={`Users/${User?.result?._id}`} >
+                                        <Image
+                                            width="30px"
+                                            height="30px"
+                                            src={User?.result?.profilePhoto}
+                                            alt="Image of profile"
+                                            style={{
+                                                // marginRight: "10px",
+                                                borderRadius: "5px",
+                                            }}
+                                        />
+                                    </Link>
+                                    <button className='nav-item nav-links' onClick={handleLogout}>Log Out</button>
+                                </>
+                            }
+                        </div>
+                    </div>
             </nav>
         </div>
     );

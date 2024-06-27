@@ -22,7 +22,7 @@ const DisplayQuestion = () => {
 
   return (
     <div className='home-container-1'>
-      { windowWidth>=700 && <LeftSidebar/>}
+      { windowWidth>768 && <LeftSidebar/>}
       <div className='home-container-2'>
         <QuestionsDetails/>
         {windowWidth>=800 && <RightSidebar/>}

@@ -94,14 +94,13 @@
 }
 
 .display-tags-time .display-time{
-    font-size: 13px;
+    font-size: 13px;                
 }
 
-@media screen and (max-width: 800px) {
+@media (max-width: 800px) {
     .main-bar {
         width: 100%; /* Make home container 2 fill the entire width */
         float: none; /* Remove any float */
-        /* text-align: center; Center its contents */
     }
 }
 
