@@ -139,8 +139,8 @@ const QuestionsDetails = () => {
 
     const location =useLocation();
     // console.log(location);//we can see in console like there is property as "pathname" which gives current url of page
-    // const url="https://doubt-resolver.netlify.app";//base url for frontend deployment
-    const url="http://localhost:3000";//base url without deploying
+    const url="https://doubt-resolver.netlify.app";//base url for frontend deployment
+    // const url="http://localhost:3000";//base url without deploying
     const handleShare = ()=>{
         copy(url+location.pathname);
         alert("Url copied : "+url+location.pathname);
