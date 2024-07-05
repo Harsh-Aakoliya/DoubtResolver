@@ -81,3 +81,43 @@ export const updateProfile = async(req,res) =>{
         res.status(404).json({message:error.message});
     }
 }
+
+export const updateFollowers=async (req,res)=>{
+    console.log("req.body",req.body);
+    const data=req.body;
+    console.log("data got for follower updation is",data);
+    const currentProfileid=data.currentProfileid;
+    const currentUserid=data.currentUserid;
+
+    try {
+        const currentProfile=await User.findById(currentProfileid);
+        const currentUser=await User.findById(currentUserid);
+
+
+        console.log("current profile in",currentProfile);
+        console.log("current user in",currentUser);
+
+
+        const allFollowings=currentUser.followings;
+        const allFollowers=currentProfile.followers;
+        if(allFollowings.includes(currentProfileid)){
+            allFollowings.remove(currentProfileid);
+            allFollowers.remove(currentUserid);
+        }
+        else{
+            allFollowings.push(currentProfileid);
+            allFollowers.push(currentUserid);
+        }
+        
+        const updatedCurrentProfile=await User.findByIdAndUpdate(currentProfileid, {...currentProfile,followers:allFollowers},{new:true});
+        const updatedCurrentUser=await User.findByIdAndUpdate(currentUserid, {...currentUser,followings:allFollowings},{new:true});
+        console.log("Updated current User profile",updatedCurrentProfile);
+        console.log("Updated current User",updatedCurrentUser);
+
+        res.status(200).json({currentProfile:updatedCurrentProfile, currentUser:updatedCurrentUser});
+        
+    } catch (error) {
+        console.log("Error while updating followers ",error);
+    }
+
+}

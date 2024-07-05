@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import LeftSidebar from "../../components/LeftSidebar/LeftSidebar"
 import Avatar from "../../components/Avatar/Avatar"
 
@@ -22,13 +23,16 @@ import ProfileBio from './ProfileBio'
 
 import {Image} from 'cloudinary-react';
 
-
+import { updateFollowers } from '../../actions/users'
+import { useDispatch } from 'react-redux'
 
 import "./UsersProfile.css"
+import Followers from './Followers/Followers'
+import Followings from './Followings/Followings'
 
 
 const UserProfile = () => {
-
+  
   const users=useSelector((state) => state.usersReducer)  //we got all the registed user from react redux
   // console.log("all the users",users);
   //now we are extracting id of that user on whose profile currently we at
@@ -41,7 +45,7 @@ const UserProfile = () => {
   const currentUser= useSelector((state) => state.currentUserReducer);
   console.log("currentUser",currentUser);
 
-  const [Switch, setSwitch] =useState(false);
+  const [Switch, setSwitch] =useState(false); 
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -56,6 +60,30 @@ const UserProfile = () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+  
+  const [isFollowing,setIsFollowing]=useState(true)
+
+  useEffect(()=>{
+    const fnd=currentProfile?.followers?.find((id)=> id == currentUser?.result?._id);
+    if(fnd) 
+      setIsFollowing(true);
+  else setIsFollowing(false);
+  },[currentProfile])
+
+  console.log("is followings",isFollowing);
+  
+  const dispatch=useDispatch();
+  const navigate=useNavigate();
+  const handlefollower=(e)=>{
+    e.preventDefault();
+    if(!currentUser){
+      alert("Login or signUp first to follow");
+      navigate("/Auth");
+    }
+    console.log("currentuser id and profile id",currentUser?.result?._id,id);
+    //currentUserId and currentProfileId should be passed
+      dispatch(updateFollowers({currentProfileid:id, currentUserid:currentUser?.result?._id}));
+  }
 
   return (
     
@@ -77,7 +105,26 @@ const UserProfile = () => {
                       <div className="user-name">
                         <h1>{currentProfile?.name}</h1>
                         <p><FontAwesomeIcon icon={faBirthdayCake} /> Joined {moment(currentProfile?.joinedOn).fromNow()}</p>
+                        {
+                          currentProfile?._id !== currentUser?.result?._id ? <button onClick={handlefollower}>{ !isFollowing ? "Follow" : "Following"}</button> : <></>
+                        }
                       </div>
+                      {
+                        currentProfile ? 
+                          <div className='connections'>
+                            <Link
+                                to={`/Users/${currentProfile?._id}/Followers`}
+                                state={{ user: currentProfile}}
+                              >
+                                Followers
+                            </Link>
+
+
+                          <Link to={`/Users/${currentProfile?._id}/Followings`} state={{user:currentProfile}}className='user-profile-link'>
+                              Followings
+                          </Link>
+                          </div> : <>Loading followers and followings</>
+                        }
                     </div> 
                       {
                         //if current logged in user and profile which we are viewing is same then and only then we need to show that edit btn

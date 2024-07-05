@@ -11,6 +11,7 @@ import {getAllUsers} from "../controllers/users.js";
 import auth from "../middlewares/auth.js"
 //controller for updating profile
 import {updateProfile} from "../controllers/users.js"
+import { updateFollowers } from "../controllers/users.js";
 
 
 const router=express.Router();
@@ -32,7 +33,9 @@ router.get("/getAllUsers",getAllUsers);
 
 
 //for changing profile of user
-router.patch("/update/:id",auth,updateProfile);
+router.patch("/update/profile/:id",auth,updateProfile);
+
+router.patch("/update/followers",auth,updateFollowers)
 
 
 export default router;

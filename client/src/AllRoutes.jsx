@@ -11,6 +11,8 @@ import UserProfile from './pages/UserProfile/UserProfile'
 import Forgotpassword from './pages/ForgotPassword/Forgotpassword'
 import ResetPassword from './pages/ForgotPassword/ResetPassword'
 import TagProfile from './pages/Tags/TagProfile'
+import Followers from './pages/UserProfile/Followers/Followers'
+import Followings from './pages/UserProfile/Followings/Followings'
 const AllRoutes = () => {
   return (
     <div>
@@ -27,6 +29,8 @@ const AllRoutes = () => {
 
             {/* for specific user page */}
             <Route path="/Users/:id" element={<UserProfile />}></Route>
+            <Route path="/Users/:id/Followers" element={<Followers />}></Route>
+            <Route path="/Users/:id/Followings" element={<Followings />}></Route>
 
             <Route path="/Forgotpassword" element={<Forgotpassword />}></Route>
 

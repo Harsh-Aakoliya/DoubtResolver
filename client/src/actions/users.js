@@ -40,3 +40,17 @@ export const updateProfile = (id, updateData) => async (dispatch) => {
         console.log(error);
     }
 };
+
+export const updateFollowers=(updatedata) => async (dispatch) =>{
+    try{
+        console.log(updatedata);
+        const {data}= await api.updateFollowers(updatedata);
+        console.log("data after follower updation",data);
+        await dispatch({ type: "UPDATE_CURRENT_USER", payload: data.currentProfile });
+        await dispatch({ type: "UPDATE_CURRENT_USER", payload: data.currentUser });
+        fetchAllUsers();
+    }
+    catch(err){
+        console.log(err);
+    }
+}

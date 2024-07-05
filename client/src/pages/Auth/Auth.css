@@ -7,13 +7,6 @@
     align-items: center; /* top and above have same space*/
 }
 
-/*for AboutAuth*/
-.auth-container-1{
-    /* below two line will give space between AboutAuth and signup container*/
-    padding: 20px ;
-    margin-right:  30px;
-}
-
 .login-logo{
     padding: 20px 30px;
 }
@@ -34,7 +27,7 @@
     background-color: white;
     border-radius: 10px;
     display: flex;
-    flex-direction: column; /*email and password will be one above other*/
+    flex-direction: column; 
     box-shadow: 0 10px 25px rgb(0 0 0 /5%),
                 0 20px 48px rgb(0 0 0 /5%),
                 0 1px 4px rgb(0 0 0/10% );
@@ -42,7 +35,7 @@
 
 .auth-container-2 form label input{
     padding: 10px;/* Give space between text and border so box become bigger then usual*/
-    width: calc(100% - 30px); /* there should be space at front and after of minus in calc so here it will leave intotal 30px at side of input box*/
+    width: 100%;
     border: solid 1px #0000003e;
     font-size: 13px; /* font size of text inside input*/
 }
@@ -114,23 +107,7 @@ auth-btn.loading:howver {
     align-items: center;
     backdrop-filter: blur(5px); /* Add a blur effect to the background */
     z-index: 999; /* Make sure it's above other elements */
-    animation: loadingDots 1s infinite;
 }
-@keyframes loadingDots {
-    0%, 20% {
-      content: ' .';
-    }
-    40% {
-      content: ' ..';
-    }
-    60% {
-      content: ' ...';
-    }
-    80%, 100% {
-      content: '';
-    }
-  }
-
 
 .handle-switch-btn{
     background-color: transparent;
@@ -141,5 +118,9 @@ auth-btn.loading:howver {
 }
 
 
-
+@media (max-width:425px){
+    .auth-container-1{
+        text-align: center;
+    }
+}
 

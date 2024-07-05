@@ -52,8 +52,9 @@ export const bookmarkQuestion=(userId,questionId)=>API.patch(`/questions/bookmar
 export const fetchAllUsers = ()=>API.get("/user/getAllUsers");
 
 //for updating profile
-export const updateProfile =(id,updateData)=>API.patch(`/user/update/${id}`,updateData);
+export const updateProfile =(id,updateData)=>API.patch(`/user/update/profile/${id}`,updateData);
 
+export const updateFollowers=(updatedata)=>API.patch(`/user/update/followers`,updatedata);
 
 
 

@@ -7,6 +7,7 @@ import jwt from "jsonwebtoken"
 
 const auth = (req,res,next)=>{
     try {
+        console.log(req.headers.authorization);
         const token =req.headers.authorization.split(" ")[1];   //here req.headers.authorization is string with value as req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem("Profile")).token}`; (refer index.js file of api ) now after spliting it with space we got "Bearer" and "${JSON.parse(localStorage.getItem("Profile")).token" and extracting header ==> "${JSON.parse(localStorage.getItem("Profile")).token"
 
 

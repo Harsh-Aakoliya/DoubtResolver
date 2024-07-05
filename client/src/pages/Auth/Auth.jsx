@@ -26,7 +26,7 @@ const Auth = () => {
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [isPassValid,setIsPassValid]=useState(false);
-    const [isChecked,setIsChecked]=useState(true);
+    const [isChecked,setIsChecked]=useState(false);
 
     //this is for different checks that user have to pass while creating password
     //check[0] -> password length must be in between 8 and 15
@@ -127,17 +127,13 @@ const Auth = () => {
   return (
     <section className={`auth-section ${isLoading ? 'loading-overlay' : ''}`}>
     {
-    isLoading && 
-    <div className="loading-overlay">
-            <h1>Validating Credential</h1>
-    </div>
-    }
-    {
-        isSignup && <AboutAuth />
-    }
-
+        isLoading && 
+        <div className="loading-overlay">
+                <h1>Validating Credential</h1>
+        </div>
+        }
         <div className='auth-container-2'>
-           {!isSignup && <img src={icon} alt='stack Overflow logo' className='login-logo'></img>} 
+            <img src={icon} alt='stack Overflow logo' className='login-logo'></img>
             <form onSubmit={handleSubmit}>
                 {
                     isSignup && (

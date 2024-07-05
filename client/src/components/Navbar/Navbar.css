@@ -152,19 +152,22 @@
     }
     .navbar{
         min-width: 88%;
+        justify-content: space-around;
     }
     .main-nav{
         gap: 0px;
+    }
+    .LogOut{
+        padding: 5px 5px;
+    }
+    .LogIn{
+        padding: 5px 5px;
     }
 }
 
 @media (max-width: 376px) {
     .right-section{
         gap: 2px;
-        
-    }
-    .LogOut{
-        padding: 10px 5px;
     }
 }
 

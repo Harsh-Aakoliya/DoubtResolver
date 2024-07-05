@@ -53,10 +53,10 @@ const QuestionsDetails = () => {
     console.log("All users",allUsers);
     const curUser=useSelector((state)=>(state.currentUserReducer));
     console.log("curUser",curUser)
-    const User=allUsers?.find((user)=>(user._id === curUser?.result?._id));
+    const User=allUsers?.find((user)=>(user?._id === curUser?.result?._id)) || null;
     console.log("Current user that have logged in ",User);
     //code for upvoting and downvoting
-    const curQuestion=questionsList?.data?.find(question => question._id === id);
+    const curQuestion=questionsList?.data?.find(question => question?._id === id);
     const curQuestionUpVoteList=curQuestion?.upVote;
     const curQuestionDownVoteList=curQuestion?.downVote;
     console.log("all upVotes that current question have",curQuestionUpVoteList)
@@ -94,7 +94,7 @@ const QuestionsDetails = () => {
     console.log("all questions",questionsList);
     console.log("all tags",tagList);
 
-        let fndqn=questionsList.data?.find( question=>question._id === id);//here questionList.data?.data is important because if you not do that and you reload then it will through an error that .find is not function on null
+        let fndqn=questionsList?.data?.find( question=>question?._id === id);//here questionList.data?.data is important because if you not do that and you reload then it will through an error that .find is not function on null
         console.log("fnd ",fndqn);
 
         const allTags=fndqn?.questionTags || [];
@@ -127,7 +127,7 @@ const QuestionsDetails = () => {
             }
             else{
                 //calling function of action folder of question.js of postAnser() to do specific action on submitting
-                dispatch(postAnswer({ id, noOfAnswers: answerLength + 1 , answerBody: Answer , userAnswered: User.name, userId: User._id}));
+                dispatch(postAnswer({ id, noOfAnswers: answerLength + 1 , answerBody: Answer , userAnswered: User.name, userId: User?._id}));
             }
         } 
     }
@@ -165,7 +165,7 @@ const QuestionsDetails = () => {
             return;
         }
         setUpVoting(true); // Set upvoting state to true immediately
-        dispatch(voteQuestion(id, "upVote", User._id))
+        dispatch(voteQuestion(id, "upVote", User?._id))
             .then(async () => {
                 setHaveUpVoted(!haveUpVoted); // Update upvoted state after successful vote
                 setUpVoting(false)
@@ -184,7 +184,7 @@ const QuestionsDetails = () => {
             return;
         }
         setDownVoting(true); // Set downvoting state to true immediately
-        dispatch(voteQuestion(id, "downVote", User._id))
+        dispatch(voteQuestion(id, "downVote", User?._id))
             .then(() => {
                 setHaveDownVoted(!haveDownVoted)
                 setDownVoting(false); // Reset downvoting state after vote is completed
@@ -222,13 +222,13 @@ const QuestionsDetails = () => {
   return (
     <div className='question-details-page'>
         {
-            questionsList.data === null ?
+            questionsList?.data === null ?
             <h1>Loading...</h1>:
             <>
                 {
                     /* if any id of our questoinList matches with id extracted then we will return it */
-                    questionsList.data.filter(question => question._id === id).map(question =>(
-                        <div key={question._id}>
+                    questionsList?.data.filter(question => question?._id === id).map(question =>(
+                        <div key={question?._id}>
                             <section className='question-details-container'>
                                 <h1>{question.questionTitle}</h1>
                                 <div className="question-details-container-2">
@@ -297,7 +297,7 @@ const QuestionsDetails = () => {
                                         <h3>
                                             {question.noOfAnswers} Answers
                                         </h3>
-                                        <DisplayAnswer key={question._id} question={question} handleShare={handleShare}/>
+                                        <DisplayAnswer key={question?._id} question={question} handleShare={handleShare}/>
                                     </section>
                                 )
                             }
@@ -317,7 +317,7 @@ const QuestionsDetails = () => {
                                     Browse Other Questions tagged
                                     {
                                         allTagsDetails?.map((tag)=>(
-                                            <Link to={`/Tags/${tag._id}`} ley={tag.tagTitle} className='ans-tags'> {tag.tagTitle} </Link>
+                                            <Link to={`/Tags/${tag?._id}`} ley={tag.tagTitle} className='ans-tags'> {tag.tagTitle} </Link>
                                         ))
                                     }
                                     or
@@ -335,5 +335,3 @@ const QuestionsDetails = () => {
 }
 
 export default QuestionsDetails;
-
-
