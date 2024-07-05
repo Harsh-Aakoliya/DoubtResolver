@@ -1,3 +1,9 @@
 .followers-container{
     margin-top: 75px;
 }
+.user-list-container{
+    padding: 30px 0px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(150px,1fr));
+    gap:30px;
+}
