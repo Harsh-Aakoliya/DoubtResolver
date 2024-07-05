@@ -20,9 +20,9 @@ function Followers() {
 
   return (
     <div className='followers-container'>
-      <h1>List of all the Followings</h1>
+      <h1>List of all the Followers</h1>
       {
-        (allFollowers.length === 0) && ((<div>No Followings yet</div>))
+        (allFollowers.length === 0) && ((<div>No Followers yet</div>))
       }
         <div className='user-list-container'>
           {

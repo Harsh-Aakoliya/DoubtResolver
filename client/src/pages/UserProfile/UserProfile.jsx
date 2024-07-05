@@ -87,8 +87,15 @@ const UserProfile = () => {
 
   return (
     
-    !currentProfile ?<h1 style={{marginTop:"100px"}}>User profile not exist</h1>
-:
+    !currentProfile ? (
+      <div className="profile-not-found">
+        <h1>User profile does not exist</h1>
+        <h2>
+          View all existing 
+          <Link to={'/Users'}> Users</Link>
+        </h2>
+      </div>
+    ) :
     <div className='home-container-1'>
        { windowWidth>768 && <LeftSidebar/>}
           <div className="home-container-2">

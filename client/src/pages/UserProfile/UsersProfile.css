@@ -1,86 +1,152 @@
-.user-details-container{
-    width: 100%;
-    margin-top: 50px; /* to get everthing below that navbar*/
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-}
-
-.user-details{
-    display: flex;
-    align-items: flex-start;
-}
-
-.user-name{
-    padding-left: 20px;
-}
-
-.user-name p{
-    color: #7e7e7e;
-}
-
-.edit-profile-btn{
-    padding: 8px 10px;
-    border: solid 1px #7e7e7e;
-    border-radius: 2px;
-    background-color: white;
-    cursor: pointer;
-    transition: 0.3s;
-
-}
-
-.edit-profile-btn:hover{
-    background-color: #f5f9fc;
-}
-
-.edit-profile-title{
-    padding: 20px 0px;
-    border-bottom: solid 1px #dbd9d9;
-}
-
-.edit-profile-title-2{
-    color: grey;
-    font-weight: 400;
-}
-
-.edit-profile-form{
+/* Improve overall layout */
+.home-container-2 {
     padding: 20px;
-    border: solid 1px #dbd9d9;
-    border-radius: 5px;
-}
-
-.edit-profile-form label h3{
-    margin: 0%;
-    padding: 3px 0px;
-}
-
-.edit-profile-form label input, .edit-profile-form label textarea{
-    padding: 5px;
-    margin-bottom: 20px;
-    border: solid 1px #dbd9d9;
-    width: 50%;
-}
-
-.user-submit-btn{
-    padding: 14px 10px;
+    max-width: 1200px;
+    /* margin: 0 auto; */
+    margin-top: 50px;
+  }
+  
+  /* Style the user details section */
+  .user-details-container {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .user-details {
+    gap: 20px;
+  }
+  
+  /* Style the profile image */
+  .user-details img {
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Enhance user name styling */
+  .user-name h1 {
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  .user-name p {
+    font-size: 0.9em;
+    margin-bottom: 10px;
+  }
+  
+  /* Style the follow/following button */
+  .user-name button {
+    padding: 8px 16px;
     background-color: #0a95ff;
     color: white;
     border: none;
-    border-radius: 5px;
-    transition: 0.2s;
+    border-radius: 4px;
     cursor: pointer;
-}
-
-.user-submit-btn:hover{
+    transition: background-color 0.3s;
+  }
+  
+  .user-name button:hover {
     background-color: #0074cc;
-
-}
-
-.user-cancel-btn{
-    padding: 14px 10px;
+  }
+  
+  /* Style for the connections container */
+.connections {
+    margin-top: 15px;
+    display: flex;
+    gap: 15px;
+  }
+  
+  /* Style for the followers and followings links */
+  .connections a {
+    text-decoration: none;
     color: #0a95ff;
-    background-color: transparent;
-    border: none;
-    margin-left: 10px;
-    cursor: pointer;
-}
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 20px;
+    background-color: #e1ecf4;
+    transition: all 0.3s ease;
+  }
+  
+  /* Hover effect for the links */
+  .connections a:hover {
+    background-color: #d0e3f1;
+    color: #0074cc;
+  }
+  
+  /* Active state for the links */
+  .connections a:active {
+    background-color: #b3d3ea;
+  }
+  
+  /* Style for the text inside the links */
+  .connections a span {
+    font-weight: bold;
+    margin-right: 5px;
+  }
+  .profile-not-found {
+    text-align: center;
+    margin-top: 100px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .profile-not-found h1 {
+    color: #d32f2f;
+    margin-bottom: 20px;
+  }
+  
+  .profile-not-found h2 {
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .profile-not-found a {
+    color: #0a95ff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  }
+  
+  .profile-not-found a:hover {
+    background-color: #0a95ff;
+    color: white;
+  }
+  
+  .profile-not-found a:active {
+    background-color: #0074cc;
+  }
+  
+  /* Responsive design for smaller screens */
+  @media (max-width: 768px) {
+    .connections {
+        flex-direction: column;
+        align-items: center;
+      }
+    
+      .connections a {
+        width: 100%;
+        text-align: center;
+      }
+    .user-details-container {
+      flex-direction: column;
+    }
+  
+    .user-details {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .edit-profile-btn {
+      margin-top: 20px;
+      align-self: center;
+    }
+  
+    .edit-profile-form label input,
+    .edit-profile-form label textarea {
+      width: 100%;
+    }
+  }
