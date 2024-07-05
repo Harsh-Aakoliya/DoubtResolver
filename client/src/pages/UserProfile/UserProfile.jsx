@@ -118,7 +118,7 @@ const UserProfile = () => {
                               >
                                 Followers
                             </Link>
-
+                          <br/>
 
                           <Link to={`/Users/${currentProfile?._id}/Followings`} state={{user:currentProfile}}>
                               Followings
