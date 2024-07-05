@@ -120,7 +120,7 @@ const UserProfile = () => {
                             </Link>
 
 
-                          <Link to={`/Users/${currentProfile?._id}/Followings`} state={{user:currentProfile}}className='user-profile-link'>
+                          <Link to={`/Users/${currentProfile?._id}/Followings`} state={{user:currentProfile}}>
                               Followings
                           </Link>
                           </div> : <>Loading followers and followings</>
