@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "hamburger-react": "^2.5.1",
-    "nodemon": "^3.1.2",
-    "redux-devtools-extension": "^2.13.9"
-  }
-}
