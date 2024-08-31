@@ -1,0 +1,19 @@
+# Ignore all node_modules folders
+**/node_modules
+
+# Ignore build artifacts
+**/build
+**/dist
+
+# Ignore environment files
+**/.env
+
+# Ignore log files
+**/*.log
+
+# Ignore Mac system files
+.DS_Store
+
+# Ignore editor-specific files
+.vscode
+.idea
