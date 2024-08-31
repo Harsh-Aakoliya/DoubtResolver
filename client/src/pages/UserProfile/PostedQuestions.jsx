@@ -5,7 +5,7 @@ function PostedQuestions({postedQuestions}) {
     console.log("postedquestions are",postedQuestions);
     return (
       <div>
-        <h3>Your Posted Questions</h3>
+        <h3>Posted Questions</h3>
         {
           postedQuestions.length === 0 ? (
             <p><strong/><Link to="/AskQuestion"> Ask your </Link>first question and save it for letter</p>

@@ -85,6 +85,12 @@ const UserProfile = () => {
       dispatch(updateFollowers({currentProfileid:id, currentUserid:currentUser?.result?._id}));
   }
 
+  const [isImageExpanded, setIsImageExpanded] = useState(false);
+
+  const toggleImageExpansion = () => {
+    setIsImageExpanded(!isImageExpanded);
+  };
+
   return (
     
     !currentProfile ? (
@@ -102,13 +108,16 @@ const UserProfile = () => {
               <section>
                   <div className="user-details-container">
                    <div className="user-details">
-                      <Image
-                        src={currentProfile?.profilePhoto}
-                        width="128"
-                        height="128"
-                        alt="Image not found"
-                        onError={(e) => console.log("Image Error:", e)}
-                      />
+                      <div className="profile-image-container">
+                        <Image
+                          src={currentProfile?.profilePhoto}
+                          width={"128"}
+                          height={"128"}
+                          alt="Profile"
+                          onError={(e) => console.log("Image Error:", e)}
+                          onClick={toggleImageExpansion}
+                        />
+                      </div>
                       <div className="user-name">
                         <h1>{currentProfile?.name}</h1>
                         <p><FontAwesomeIcon icon={faBirthdayCake} /> Joined {moment(currentProfile?.joinedOn).fromNow()}</p>
@@ -133,6 +142,16 @@ const UserProfile = () => {
                           </div> : <>Loading followers and followings</>
                         }
                     </div> 
+                    {isImageExpanded && <div className="overlay" onClick={toggleImageExpansion}>
+                      <Image
+                          src={currentProfile?.profilePhoto}
+                          width={"128"}
+                          height={"128"}
+                          alt="Profile"
+                          onError={(e) => console.log("Image Error:", e)}
+                          className={isImageExpanded ? "expanded-image" : ""}
+                        />
+                      </div>}
                       {
                         //if current logged in user and profile which we are viewing is same then and only then we need to show that edit btn
                         currentUser?.result._id === id && (
