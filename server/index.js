@@ -125,10 +125,10 @@ app.post("/Forgotpassword",async (req,res)=>{
           
 
           var mailOptions = {
-            from: 'harshaakoliya20@gmail.com',
+            from: `${process.env.SENDER_EMAIL}`,
             to: user.email,
             subject: 'Reset Password Link', 
-            text: `http://localhost:3000/reset_password/${user._id}/${token}`
+            text: `${process.env.CLIENT_BASE_URL}/reset_password/${user._id}/${token}`
             // text: `https://doubt-resolver.netlify.app/reset_password/${user._id}/${token}`
           };
           
