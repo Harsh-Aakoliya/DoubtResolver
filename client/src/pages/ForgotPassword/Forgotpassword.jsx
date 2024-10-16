@@ -11,8 +11,9 @@ import { useNavigate } from 'react-router-dom'
 import loading from '../../components/Loading/loading'
 import axios from 'axios'
 import { useSelector } from 'react-redux';
+// const SERVER_BASE_URL="http://localhost:5000"
+const SERVER_BASE_URL="https://stackoverflow-clone-bf06.onrender.com"
 
-    
 const Forgotpassword = () => {
     const [email, setEmail] = useState("");
     const [isLoading, setIsLoading] = useState(false);
@@ -33,8 +34,7 @@ const Forgotpassword = () => {
             }
         })
         if(found){
-            axios.post("http://localhost:5000/Forgotpassword",{email})
-            // axios.post("https://stackoverflow-clone-bf06.onrender.com/Forgotpassword",{email})
+            axios.post(`${SERVER_BASE_URL}/Forgotpassword`,{email})
             .then(res => {
                 if(res.data.Status === "Success") {
                     alert("Mail has been sent to you on email id : ",email);

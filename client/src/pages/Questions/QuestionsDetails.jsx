@@ -37,6 +37,9 @@ import Vote from '../../components/Common/Vote';
 import Bookmark from '../../components/Common/bookmark/Bookmark';
 
 
+// const CLIENT_BASE_URL="http://localhost:3000"
+const CLIENT_BASE_URL="https://doubt-resolver.netlify.app"
+
 
 
 
@@ -140,7 +143,7 @@ const QuestionsDetails = () => {
     const location =useLocation();
     // console.log(location);//we can see in console like there is property as "pathname" which gives current url of page
     // const url="https://doubt-resolver.netlify.app";//base url for frontend deployment
-    const url="http://localhost:3000";//base url without deploying
+    const url=`${CLIENT_BASE_URL}`;//base url without deploying
     const handleShare = ()=>{
         copy(url+location.pathname);
         alert("Url copied : "+url+location.pathname);

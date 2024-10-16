@@ -11,7 +11,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 import loading from '../../components/Loading/loading'
 import axios from 'axios'
 import { useSelector } from 'react-redux';
-
+// const SERVER_BASE_URL="http://localhost:5000"
+const SERVER_BASE_URL="https://stackoverflow-clone-bf06.onrender.com"
     
 const ResetPassword = () => {
     const [password, setPassword] = useState("");
@@ -39,7 +40,7 @@ const ResetPassword = () => {
             alert("Please create valid password");
             return;
         }
-        axios.post(`http://localhost:5000/reset_password/${id}/${token}`,{password})
+        axios.post(`${SERVER_BASE_URL}/reset_password/${id}/${token}`,{password})
         // axios.post(`https://stackoverflow-clone-bf06.onrender.com/reset_password/${id}/${token}`,{password})
         .then(res => {
             if(res.data.Status === "Success") {
