@@ -165,6 +165,15 @@ app.post("/reset_password/:id/:token",async(req,res)=>{
 
 })
 
+import { incrementViewCount, getAnalyticsData } from "./controllers/viewController.js"
+
+app.post("/increment-view", incrementViewCount);
+app.get("/analytics", getAnalyticsData);
+
+
+
+
+
 //4) finding avilable port in environment if not any avilable then need to assign as 5000 which is of server's port
 const PORT=process.env.PORT || 5000;
 

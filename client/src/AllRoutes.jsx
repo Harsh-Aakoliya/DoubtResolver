@@ -13,6 +13,7 @@ import ResetPassword from './pages/ForgotPassword/ResetPassword'
 import TagProfile from './pages/Tags/TagProfile'
 import Followers from './pages/UserProfile/Followers/Followers'
 import Followings from './pages/UserProfile/Followings/Followings'
+import AnalyticsDashboard from './pages/Analytics/Analytics'
 const AllRoutes = () => {
   return (
     <div>
@@ -40,6 +41,7 @@ const AllRoutes = () => {
             <Route path="/Tags" element={<Tags />}/>
             {/* for each tag */}
             <Route path="/Tags/:id" element={<TagProfile />}></Route>
+            <Route path="/Analytics" element={<AnalyticsDashboard />}></Route>
         </Routes>
 
     </div>
